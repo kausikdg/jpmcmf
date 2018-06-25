@@ -1,0 +1,71 @@
+{
+    "name": "TimePeriods",
+    "method": "getTimePeriods",
+    "input": {
+        "type": "object",
+        "properties": {
+            "date": {
+                "type": "string"
+            }
+        }
+    },
+    "output": {
+        "type": "object",
+        "properties": {
+            "Error": {
+                "type": "string"
+            },
+            "periods": {
+                "type": "object",
+                "properties": {
+                    "xmlns": {
+                        "type": "string"
+                    },
+                    "period": {
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "string"
+                            },
+                            "preId": {
+                                "type": "string"
+                            },
+                            "nexId": {
+                                "type": "stringg"
+                            },
+                            "sequence": {
+                                "type": "string"
+                            },
+                            "type": {
+                                "type": "string"
+                            },
+                            "startDate": {
+                                "type": "string"
+                            },
+                            "endDate": {
+                                "type": "string"
+                            },
+                            "weeks": {
+                                "type": "array",
+                                "items": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "dayOfWeek" : {
+                                                "type": "string"
+                                            },
+                                            "date" : {
+                                                "type": "number"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }    
+                }
+            }
+        }
+    }
+}

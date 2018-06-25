@@ -1,0 +1,9 @@
+[
+    "authenticate.json",
+    "timesheetdetails.json",
+    "approvetimesheet.json",
+    "timeperiods.json",
+    "logout.json",
+    "timeSheetLineItems.json",
+    "timesheets.json"
+]

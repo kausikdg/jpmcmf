@@ -1,0 +1,19 @@
+{
+    "name": "restsample",
+    "version": "0.1.0",
+    "scripts": {
+        "test": "env config=./test/config.js mocha"
+    },
+    "dependencies": {
+        "lodash": "^4.17.4",
+        "request": "^2.83.0",
+        "request-promise-native": "^1.0.5",
+        "set-cookie-parser": "^2.1.1",
+        "url": "^0.11.0",
+        "xml-js": "^1.6.2"
+    },
+    "devDependencies": {
+        "chai": "^4.1.2",
+        "mocha": "^4.0.1"
+    }
+}

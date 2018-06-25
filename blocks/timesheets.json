@@ -1,0 +1,115 @@
+{
+    "name": "TimeSheetsForApproval",
+    "method": "getTimeSheetsForApproval",
+    "input": {
+        "type": "object",
+        "properties": {
+            "ownerUserId": {
+                "type": "string"
+            },
+            "periodId": {
+                "type": "string"
+            }
+        }
+    },
+    "output": {
+        "type": "object",
+        "properties": {
+            "Error": {
+                "type": "string"
+            },
+            "timesheets": {
+                "type": "object",
+                "properties": {
+                    "xmlns": {
+                        "type": "string"
+                    },
+                    "timeSheet": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "string"
+                                },
+                                "periodId": {
+                                    "type": "string"
+                                },
+                                "resourceId": {
+                                    "type": "stringg"
+                                },
+                                "sequence": {
+                                    "type": "string"
+                                },
+                                "status": {
+                                    "type": "string"
+                                },
+                                "description": {
+                                    "type": "string"
+                                },
+                                "policies": {
+                                    "type": "object",
+                                    "properties": {
+                                        "policy": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "value": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "notes": {
+                                    "type": "object",
+                                    "properties": {
+                                        "note": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string"
+                                                    },
+                                                    "description": {
+                                                        "type": "string"
+                                                    },
+                                                    "type": {
+                                                        "type": "string"
+                                                    },
+                                                    "createdBy": {
+                                                        "type": "string"
+                                                    },
+                                                    "createdDate": {
+                                                        "type": "string"
+                                                    },
+                                                    "lastUpdatedBy": {
+                                                        "type": "string"
+                                                    },
+                                                    "lastUpdatedDate": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "createdBy": {
+                                    "type": "string"
+                                },
+                                "lastUpdatedBy": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }    
+                }
+            }
+        }
+    }
+}

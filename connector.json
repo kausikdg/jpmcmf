@@ -1,0 +1,18 @@
+{
+    "name": "HPPPM",
+    "description": "HP Project and Portfolio Manaegment at JPMC",
+    "config": {
+        "baseUrl": {
+            "name": "URL",
+            "type": "text",
+            "required": true,
+            "description": "REST API Endpoint, e.g. https://ppm.test.bnymellon.net/itg/rest/tm"
+        },
+        "basicAuthToken": {
+            "name": "Auth Token",
+            "type": "text",
+            "required": true,
+            "description": "Base64 basic authorization token"
+        }
+    }
+}

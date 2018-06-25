@@ -1,0 +1,117 @@
+{
+    "name": "ApproveTimeSheet",
+    "method": "approveTimeSheet",
+    "input": {
+        "type": "object",
+        "properties": {
+            "type": {
+                "type": "string"
+            },
+            "note": {
+                "type": "string"
+            },
+            "asynchronized": {
+                "type": "string"
+            },
+            "action": {
+                "type": "string"
+            },
+            "timeSheetId": {
+                "type": "string"
+            }
+        }
+    },
+    "output": {
+        "type": "object",
+        "properties": {
+            "Error": {
+                "type": "string"
+            },
+            "Status": {
+                "type": "string"
+            },
+            "timesheet": {
+                "type": "object",
+                "properties": {
+                    "xmlns": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "string"
+                    },
+                    "periodId": {
+                        "type": "string"
+                    },
+                    "resourceId": {
+                        "type": "stringg"
+                    },
+                    "sequence": {
+                        "type": "string"
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "policies": {
+                        "type": "object",
+                        "properties": {
+                            "policy": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "name": {
+                                            "type": "string"
+                                        },
+                                        "value": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "notes": {
+                        "type": "object",
+                        "properties": {
+                            "note": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "type": {
+                                        "type": "string"
+                                    },
+                                    "createdBy": {
+                                        "type": "string"
+                                    },
+                                    "createdDate": {
+                                        "type": "string"
+                                    },
+                                    "lastUpdatedBy": {
+                                        "type": "string"
+                                    },
+                                    "lastUpdatedDate": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "createdBy": {
+                        "type": "string"
+                    },
+                    "lastUpdatedBy": {
+                        "type": "string"
+                    }
+                }
+            }    
+        }
+    }
+}

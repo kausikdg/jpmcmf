@@ -1,0 +1,29 @@
+{
+    "name": "Authenticate",
+    "method": "authenticate",
+    "input": {
+        "type": "object",
+        "properties": {
+            "username": {
+                "type": "string"
+            },
+            "password": {
+                "type": "string"
+            },
+            "foo": {
+                "type": "string"
+            }
+        }
+    },
+    "output": {
+        "type": "object",
+        "properties": {
+            "error": {
+                "type": "string"
+            },
+            "Status": {
+                "type": "string"
+            }
+        }
+    }
+}

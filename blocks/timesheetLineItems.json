@@ -1,0 +1,228 @@
+{
+    "name": "TimeSheetLineItems",
+    "method": "getTimeSheetLineItems",
+    "input": {
+        "type": "object",
+        "properties": {
+            "timeSheetId": {
+                "type": "string"
+            }
+        }
+    },
+    "output": {
+        "type": "object",
+        "properties": {
+            "Error": {
+                "type": "string"
+            },
+            "timeSheetLines": {
+                "type": "object",
+                "properties": {
+                    "xmlns": {
+                        "type": "string"
+                    },
+                    "timeSheetLine": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "string"
+                                },
+                                "workItemId": {
+                                    "type": "string"
+                                },
+                                "workItemType": {
+                                    "type": "string"
+                                },
+                                "workItemName": {
+                                    "type": "string"
+                                },
+                                "workItemDescription": {
+                                    "type": "string"
+                                },
+                                "status": {
+                                    "type": "string"
+                                },
+                                "approver": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "string"
+                                            },
+                                            "type": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                },
+                                "actuals": {
+                                    "type": "object",
+                                    "properties": {
+                                        "actual": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "activityId": {
+                                                        "type": "string"
+                                                    },
+                                                    "activityName": {
+                                                        "type": "string"
+                                                    },
+                                                    "efforts": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "dayNum": {
+                                                                    "type": "string"
+                                                                },
+                                                                "effort": {
+                                                                    "type": "string"
+                                                                }
+                                                            }
+                                                        }
+                                                    },
+                                                    "activityType": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "actualsType": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "workUnit": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "string"
+                                        },
+                                        "actualStart": {
+                                            "type": "string"
+                                        },
+                                        "actualFinish": {
+                                            "type": "string"
+                                        },
+                                        "actualEffort": {
+                                            "type": "string"
+                                        },
+                                        "percentComplete": {
+                                            "type": "string"
+                                        },
+                                        "estimatedFinish": {
+                                            "type": "string"
+                                        },
+                                        "effortModified": {
+                                            "type": "string"
+                                        }
+                                    }
+                                },
+                                "chargeCodes": {
+                                    "type": "object",
+                                    "properties": {
+                                        "updateChargeCodeFlag": {
+                                            "type": "string"
+                                        },
+                                        "requireChargeCodeFlag": {
+                                            "type": "string"
+                                        },
+                                        "tslChargeCodes": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "chargePercent": {
+                                                        "type": "string"
+                                                    },
+                                                    "chargeCode": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "id": {
+                                                                "type": "string"
+                                                            },
+                                                            "name": {
+                                                                "type": "string"
+                                                            },
+                                                            "description": {
+                                                                "type": "string"
+                                                            },
+                                                            "enabled": {
+                                                                "type": "string"
+                                                            },
+                                                            "chargeCodeCategory": {
+                                                                "type": "string"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "workItemSetId": {
+                                    "type": "string"
+                                },
+                                "notes": {
+                                    "type": "object",
+                                    "properties": {
+                                        "note": {
+                                            "type": "array",
+                                            "items": {
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string"
+                                                    },
+                                                    "description": {
+                                                        "type": "string"
+                                                    },
+                                                    "type": {
+                                                        "type": "string"
+                                                    },
+                                                    "createdBy": {
+                                                        "type": "string"
+                                                    },
+                                                    "createdDate": {
+                                                        "type": "string"
+                                                    },
+                                                    "lastUpdatedBy": {
+                                                        "type": "string"
+                                                    },
+                                                    "lastUpdatedDate": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                },
+                                "efforts": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "array",
+                                        "items": {
+                                            "dayOfWeek": {
+                                                "type": "string"
+                                            },
+                                            "date": {
+                                                "type": "string"
+                                            },
+                                            "effort": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
