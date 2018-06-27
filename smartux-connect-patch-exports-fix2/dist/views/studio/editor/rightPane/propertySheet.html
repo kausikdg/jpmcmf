@@ -1,0 +1,99 @@
+<div class="header" title="{{component && component.description ? component.description : component.name}}">
+    <span>{{component && component.name ? component.name : "Properties"}}</span>
+    <button class="fa fa-trash" title="Delete component" ng-if="isShownDeleteCompButton(component)" ng-click="deleteComponent($event)"></button>
+</div>
+<div class="content property-sheet">
+
+    <div class="pane-group property-group" ng-repeat="propertyGroup in propertyGroups track by $index" ng-init="isLastItemAdded($index, $last)" collapsible>
+
+        <input class="marker" type="checkbox" checked="checked">
+        <label class="header target">{{propertyGroup.label}}</label>
+        <div class="content">
+            <div class="properties">
+                <div class="property" ng-if="isShown(property)" ng-repeat="property in propertyGroup.properties">
+
+                    <label class="property-label">
+                        <span ng-style="{cursor : property.tooltip ? 'help' : 'auto'}" tooltips tooltip-template-url="/views/studio/editor/rightPane/propertyTooltip.html" tooltip-side="left" tooltip-append-to-body="true" tooltip-smart="true" tooltip-class="tooltip" tooltip-hidden="{{!property.tooltip ? 'true' : 'false'}}">
+                            {{property.label}}
+                        </span>
+                    </label>
+
+                    <!-- Control type: text -->
+                    <span class="property-control" ng-if="property.type === 'text'">
+                        <input type="text" placeholder="{{property.unsetValue}}" ng-model="property.value" ng-model-options="{debounce: 300}" ng-focus="property.value = property.value || property.unsetValue" ng-change="setPropertyValue(property)">
+                    </span>
+
+                    <!-- Control type: html -->
+                    <span class="property-control" ng-if="property.type === 'html'">
+                        <textarea msd-elastic placeholder="{{property.unsetValue}}" ng-model="property.value" ng-model-options="{debounce: 300}" ng-focus="property.value = property.value || property.unsetValue" ng-change="setPropertyValue(property)">
+                        </textarea>
+                    </span>
+
+                    <!-- Control type: singleSelect -->
+                    <span class="property-control" ng-if="property.type === 'singleSelect'">
+                        <select ng-options="item.value as item.label for item in property.options" ng-model="property.value" ng-change="setPropertyValue(property)">
+                        </select>
+                    </span>
+
+                    <!-- Property control type: checkbox -->
+                    <span class="property-control" ng-if="property.type === 'checkbox'">
+                        <input type="checkbox" ng-model="property.value" ng-change="setPropertyValue(property)">
+                    </span>
+
+                    <!-- Property control type: data -->
+                    <span class="property-control has-button" ng-if="property.type === 'data'">
+                        <input type="text" ng-disabled="isDisabled(property)" ng-model="property.value" ng-model-options="{debounce: 300}" ng-change="setPropertyValue(property)">
+                        <button class="property-button" ng-click="configureData(property)" ng-disabled="isDisabled(property)">
+                            <i class="fa fa-cog"></i>
+                        </button>
+                    </span>
+
+                    <!-- Property control type: action -->
+                    <span class="property-control has-button" ng-if="property.type === 'action'">
+                        <input type="text" ng-model="property.value" ng-model-options="{debounce: 300}" ng-change="setPropertyValue(property)">
+                        <button class="property-button" ng-click="configureEvent(property)">
+                            <i class="fa fa-cog"></i>
+                        </button>
+                    </span>
+
+                    <!-- Property control type: actionString -->
+                    <span class="property-control has-button" ng-if="property.type === 'actionString'">
+                        <input type="text" ng-model="property.value" ng-model-options="{debounce: 300}" ng-change="setPropertyValue(property)">
+                        <button class="property-button" ng-click="configureAction(property)">
+                            <i class="fa fa-cog"></i>
+                        </button>
+                    </span>
+
+                    <!-- Property control type: repeat -->
+                    <span class="property-control has-button" ng-if="property.type === 'repeat'">
+                        <input type="text" ng-model="property.value" ng-model-options="{debounce: 300}" ng-change="setPropertyValue(property)">
+                        <button class="property-button" ng-click="configureRepeat(property)">
+                            <i class="fa fa-cog"></i>
+                        </button>
+                    </span>
+
+                    <!-- Property control type: image -->
+                    <span class="property-control has-button" ng-if="property.type === 'image'">
+                        <input type="text" ng-model="property.value" ng-model-options="{debounce: 300}" ng-change="setPropertyValue(property)">
+                        <button class="property-button" ng-click="configureImage(property)">
+                            <i class="fa fa-cog"></i>
+                        </button>
+                    </span>
+
+                    <!-- Property control type: color -->
+                    <color-control ng-if="property.type === 'color'" property="property" ng-model="property.value" set-property="setPropertyValue">
+                    </color-control>
+
+                    <!-- Property control type: icon -->
+                    <span class="property-control has-button" ng-if="property.type === 'icon'">
+                        <input type="text" ng-model="property.value" ng-model-options="{debounce: 300}" ng-change="setPropertyValue(property)">
+                        <button class="property-button" ng-click="changeIcon(property)">
+                            <i class="fa fa-cog"></i>
+                        </button>
+                    </span>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,78 @@
+<div class="heading">
+    <h1>Edit User</h1>
+</div>
+
+<div class="content">
+    <form class="form" name="myForm" novalidate>
+        <label class="form-control row">
+            <span class="col-xs-3">
+                <span class="label">User ID (login):</span>
+            </span>
+            <span class="col-xs-6">
+                <input type="text" ng-model="user.id" id="userId" name="userId" readonly="readonly" disabled="disabled">
+            </span>
+        </label>
+        <label class="form-control row">
+            <span class="col-xs-3">
+                <span class="label">Name:</span>
+            </span>
+            <span class="col-xs-6">
+                <input type="text" ng-model="user.name">
+            </span>
+        </label>
+        <label class="form-control row">
+            <span class="col-xs-3">
+                <span class="label">Email:</span>
+            </span>
+            <span class="col-xs-6">
+                <input type="email" name="email" ng-model="user.email">
+            </span>
+        </label>
+        <label class="form-control row">
+            <span class="col-xs-3">
+                <span class="label">Password:</span>
+            </span>
+            <span class="col-xs-6 change-button">
+                <a href ng-click="changePassword()">Change</a>
+            </span>
+        </label>
+    </form>
+</div>
+
+<div class="heading">
+    <h2>Permissions</h2>
+</div>
+
+<div class="secondary-content no-border-top">
+    <form class="form" name="permForm" novalidate>
+        <label class="form-control row">
+            <span class="col-xs-3">
+                <span class="label">Administrator:</span>
+            </span>
+            <span class="col-xs-6">
+                <input type="checkbox" ng-model="user.isAdmin">
+            </span>
+        </label>
+        <label class="form-control row" ng-repeat="permission in permissions">
+            <span class="col-xs-6">
+                <span class="label truncate-label">{{permission.name || permission.id}}</span>
+            </span>
+            <span class="col-xs-6">
+                <select ng-model="permission.permission" ng-disabled="user.isAdmin">
+                    <option value="none">None</option>
+                    <option value="view">View</option>
+                    <option value="edit">Edit</option>
+                </select>
+            </span>
+        </label>
+    </form>
+</div>
+
+<div class="buttons">
+    <button class="button button-danger outline pull-left" ng-click="delete()" ng-disabled="submitted">Delete User
+    </button>
+    <button class="button" ng-click="save()" ng-disabled="submitted || !isValid()">Save
+    </button>
+    <button class="button clear" ng-click="closeThisDialog()">Cancel
+    </button>
+</div>

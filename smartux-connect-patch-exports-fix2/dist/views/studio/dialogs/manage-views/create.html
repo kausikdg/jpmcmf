@@ -1,0 +1,26 @@
+<div class="heading">
+    <h1>Create View</h1>
+</div>
+
+<div class="content">
+    <span class="control-sized gray">
+        Select a view to create the new one based on it.
+    </span>
+    <br><br>
+    <form class="form">
+        <label class="form-control row">
+            <span class="col-xs-3">
+                <span class="label">Base View:</span>
+            </span>
+            <span class="col-xs">
+                <select ng-model="model.baseView" ng-options="view.id as view.name for view in views">
+                </select>
+            </span>
+        </label>
+    </form>
+</div>
+
+<div class="buttons">
+    <button class="button" ng-click="create()" ng-disabled="submitted">Create</button>
+    <button class="button clear" ng-click="closeThisDialog()">Cancel</button>
+</div>

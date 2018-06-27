@@ -1,0 +1,31 @@
+<div class="connect-container">
+    <connect-block block="currentBlock" event-area="eventArea"></connect-block>
+    <svg id="svg-{{currentBlock.getId()}}" ng-if="currentBlock.hasSubContextBlocks()" viewbox="0,0,200,40" ng-class="{'straight-line': !currentBlock.hasSubContextBlocks(), 'curved-line': currentBlock.hasSubContextBlocks()}">
+        <marker id="head" orient="auto" markerWidth="6" markerHeight="12" refX="0.1" refY="6">
+            <path d="M0,0 V12 L6,6 Z" fill="gray"/>
+        </marker>
+        <path ng-repeat="path in currentBlock.getPaths()" stroke="grey" fill="transparent" marker-end="url(#head)" ng-attr-d="{{path}}">
+        </path>
+        <span ng-if="currentBlock.hasSubContextBlocks() && currentBlock.getDefId() === 'if'" class="true-path">True</span>
+        <span ng-if="currentBlock.hasSubContextBlocks() && currentBlock.getDefId() === 'if'" class="false-path">False</span>
+        <span ng-if="currentBlock.hasSubContextBlocks() && currentBlock.type === 'tryCatch'" class="success-path">Success</span>
+        <span ng-if="currentBlock.hasSubContextBlocks() && currentBlock.type === 'tryCatch'" class="error-path">Error</span>
+    </svg>
+    <div class="sub-contexts" ng-if="currentBlock.hasSubContextBlocks()">
+        <div ng-repeat="context in currentBlock.getSubContexts()">
+            <div class="connect-container" ng-if="context.body.length == 0">
+                    <div class="placeholder block"></div>
+            </div>
+            <connect-node ng-repeat="block in context.body" current-block="block" event-area="eventArea" is-last="$last">
+            </connect-node>
+        </div>
+    </div>
+    <div id="end-{{currentBlock.getId()}}" class="sub-contexts-seperator" ng-if="currentBlock.hasSubContexts()"></div>
+    <svg id="svgEnd-{{currentBlock.getId()}}" ng-if="!isLast" class="straight-line" viewbox="0,0,200,40">
+        <marker id="head" orient="auto" markerWidth="6" markerHeight="12" refX="0.1" refY="6">
+            <path d="M0,0 V12 L6,6 Z" fill="gray"/>
+        </marker>
+        <path stroke="grey" fill="transparent" marker-end="url(#head)" ng-attr-d="{{currentBlock.getSinglePath()}}">
+        </path>
+    </svg>
+</div>

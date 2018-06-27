@@ -1,0 +1,7 @@
+<div class="block" id="{{block.id}}" ng-class="{fake: block.type == 'fake', selected: block.selected}" ng-click="selectBlock(block, $event)">
+    <div class="single-row">
+        <i ng-click="blockSpecificSettings()" class="fa {{block.getIcon()}}" ng-class="hasSpecificSettings() ? 'clickable-icon' : 'no-specific-settings'"></i>
+        <span ng-click="blockSpecificSettings()" class="block-label text-center" ng-bind-html="block.getLabel()"></span><i class="fa fa-cog" ng-if="block.hasSettings()" ng-click="settings()"></i>
+        <i ng-if="!block.hasSettings()"></i>
+    </div>
+</div>

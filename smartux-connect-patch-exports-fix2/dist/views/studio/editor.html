@@ -1,0 +1,14 @@
+<div ui-view="sidebar" class="sidebar"></div>
+
+<div ui-view="header" ng-show="!isAllFilesMode()"></div>
+
+<div ui-view="allFilesHeader" ng-show="isAllFilesMode()"></div>
+
+<div ui-layout="{flow: 'column', dividerSize: 6}" ng-if="app" class="layout">
+
+    <div ui-view="leftPane" ui-layout-container id="west" max-size="460px" size="{{$root.globals.layout.west}}"></div>
+
+    <div ui-view="canvasHolder" ui-layout-container="central" id="central"></div>
+
+    <div ui-view="rightPane" ui-layout-container id="east" ng-if="!isAllFilesMode() && isNotBaseScreen()" max-size="1000px" size="{{$root.globals.layout.east}}"></div>
+</div>

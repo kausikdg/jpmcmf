@@ -1,0 +1,15 @@
+<span id="matched-events">
+    <button class="fa fa-refresh" title="Reload" ng-click="reload()"></button>
+    <span class="label">
+        Matched Event:
+    </span>
+    <span ng-repeat="con in explorerData.matchedConnections">
+        <span ng-if="$index > 0">,</span>
+        <span class="clickable" ng-click="openPageModel(con.mainModel)">
+            {{con.mainModel + "." + (isString(con.name) ? con.name : con.name.name)}}
+        </span>[{{con.index}}]
+    </span>
+    <span ng-if="explorerData.matchedConnections.length === 0">
+        None
+    </span>
+</span>

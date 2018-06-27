@@ -1,0 +1,31 @@
+<div class="header target">
+    <span ng-if="!showSearch">UX Components</span>
+    <span class="search-bar" ng-if="showSearch">
+        <input type="text" placeholder="Search Components" ng-model="search.name" auto-focus>
+    </span>
+    <button class="fa fa-search" ng-click="toggleSearch()" title="Search UX Components"></button>
+    <button class="fa fa-gear" ng-click="edit()" title="Edit UX Components"></button>
+</div>
+<div class="content" ng-if="checkScreensOpened()">
+    <div class="component-group" ng-repeat="componentGroup in componentGroups">
+
+        <div class="row no-margin">
+            <input class="marker" type="checkbox" checked="checked">
+            <label ng-show="showHeader(filteredComponents, componentGroup.label)" class="header target">{{componentGroup.label}}</label>
+        </div>
+        <div class="row no-margin content">
+            <div class="components">
+                <div class="palette-component" title="{{component.description}}" ng-if="component.group === componentGroup.id" ng-repeat="component in filteredComponents = (components | orderBy: 'groupIndex' | filter: search)" drag-and-drop="{
+                        draggable: true,
+                        data: {type: component.id, extendsId: component.extendsId},
+                        onStart: dragStartFromPalette,
+                        onEnd: dragEndFromPalette
+                    }">
+                    <img class="palette-image" ng-attr-src="{{config.serverUrl}}/{{component.custom ? 'custom_components' : 'components'}}/src/{{component.icon ? component.icon : component.id}}/icon.png">
+                    <div class="palette-label" ng-bind-html="component.name | highlight: search.name"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

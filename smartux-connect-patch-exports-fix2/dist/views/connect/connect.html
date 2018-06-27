@@ -1,0 +1,10 @@
+<div class="sidebar" ui-view="sidebar"></div>
+
+<div ui-view="header" ng-show="!isAllFilesMode()"></div>
+
+<div ui-view="allFilesHeader" ng-show="isAllFilesMode()"></div>
+
+<div ui-layout="{ flow : 'column', dividerSize: 6}" class="layout">
+    <div id="west" ui-layout-container ui-view="leftPane" max-size="460px" size="{{$root.globals.layout.west}}"></div>
+    <div id="central" ui-layout-container="central" ui-view="canvasHolder"></div>
+</div>

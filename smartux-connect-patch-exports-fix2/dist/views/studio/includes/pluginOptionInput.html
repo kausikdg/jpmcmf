@@ -1,0 +1,13 @@
+<!-- string -->
+<input ng-switch-when="string" ng-model="option.value" type="text">
+
+<!-- number -->
+<input type="number" ng-switch-when="number" ng-model="option.value">
+
+<!-- boolean -->
+<input type="checkbox" ng-switch-when="boolean" ng-model="option.value">
+
+<!-- array -->
+<button class="button small-btn" ng-switch-when="array" ng-click="showOptionArray(option, key)">
+    <i class="fa fa-sitemap"></i>
+</button>

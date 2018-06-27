@@ -1,0 +1,53 @@
+<div class="heading">
+    <h1>Application Styles</h1>
+</div>
+
+<div class="content">
+    <div class="subtitle">
+        Theme:
+        <select ng-model="selectedTheme" ng-change="changeTheme()" ng-options="item.label as item.label for item in themes">
+        </select>
+        <a class="save-as-new-theme" ng-if="selectedTheme" ng-click="saveAsNewTheme()">
+            Save As Custom Theme
+        </a>
+    </div>
+    <div class="row">
+        <div class="col">
+            <label class="row" ng-repeat="(colorName, colorValue) in colors">
+                <span class="col-xs-6">
+                    <span class="label">{{colorName}}</span>
+                </span>
+                <span class="col-xs">
+                    <spectrum-colorpicker ng-class="{'selected': colorName === selectedColorName}" ng-model="colorValue" on-before-show="selectColorForEdit(colorName, colorValue)" options="{
+                         flat: false
+                        }">
+                    </spectrum-colorpicker>
+                </span>
+            </label>
+        </div>
+        <div class="col color-picker" id="color-picker">
+            <spectrum-colorpicker style="margin: 0 auto;" ng-model="selectedColorValue" on-change="onChangeColor()" options="{
+                  flat: true,
+                  showInput: true,
+                  showAlpha: true,
+                  showInitial: true,
+                  showPalette: true,
+                  preferredFormat: 'hex',
+                  showButtons: false
+                }">
+            </spectrum-colorpicker>
+            <div class="description">
+                <span ng-if="defaultThemes.indexOf(selectedTheme) > -1">Default themes are not editable.</span>
+                &nbsp;
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="buttons">
+    <button class="button button-danger outline pull-left" ng-if="selectedTheme && !isAppColors(selectedTheme) && defaultThemes.indexOf(selectedTheme) == -1" ng-click="deleteTheme()" ng-disabled="submitted">Delete Theme
+    </button>
+    <button class="button" ng-disabled="submitted" ng-click="save()">Save</button>
+    <button class="button clear" ng-click="closeThisDialog()">Cancel</button>
+</div>

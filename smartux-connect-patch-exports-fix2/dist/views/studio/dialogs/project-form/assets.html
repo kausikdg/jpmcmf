@@ -1,0 +1,38 @@
+<form class="form">
+    <label class="form-control row">
+            <span class="col-xs-3">
+                <span class="label">Mobile App Name:</span>
+            </span>
+        <span class="col-xs-9">
+                <input type="text" ng-model="model.mobileAppName" maxlength="12">
+            </span>
+    </label>
+    <label class="form-control row">
+            <span class="col-xs-3">
+                <span class="label">Mobile App Icon:</span>
+            </span>
+        <span class="col-xs-2" onclick="this.querySelector('input').click()">
+                <button class="button outline">Upload File</button>
+                <input type="file" accept="image/*" class="hidden" onchange="angular.element(this).scope().fileChanged(this, 'mobileIcon')">
+            </span>
+        <span class="col-xs-2">
+                <div class="app-icon" ng-if="model.mobileIconUrl">
+                    <img ng-src="{{serverUrl + model.mobileIconUrl  + getQueryParams}}">
+                </div>
+            </span>
+    </label>
+    <label class="form-control row">
+            <span class="col-xs-3">
+                <span class="label">Splash Screen:</span>
+            </span>
+        <span class="col-xs-2" onclick="this.querySelector('input').click()">
+                <button class="button outline">Upload File</button>
+                <input type="file" accept="image/*" class="hidden" onchange="angular.element(this).scope().fileChanged(this, 'ssImage')">
+            </span>
+        <span class="col-xs-2">
+                <div class="app-icon" ng-if="model.mobileSSImageUrl">
+                    <img ng-src="{{serverUrl + model.mobileSSImageUrl + getQueryParams}}">
+                </div>
+            </span>
+    </label>
+</form>

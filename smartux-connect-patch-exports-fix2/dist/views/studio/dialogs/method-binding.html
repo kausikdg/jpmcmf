@@ -1,0 +1,122 @@
+<div class="heading">
+    <h1>Select an Action or Method</h1>
+</div>
+
+<ul class="menu short">
+    <li ng-click="active=1" ng-class="{'active':active===1}">
+        Perform an action
+    </li>
+    <li ng-click="active=2" ng-class="{'active':active===2}">
+        Open a URL
+    </li>
+</ul>
+
+<div class="content no-padding-top" ng-switch="active">
+
+    <div class="row" ng-switch-when="1">
+        <div class="col col-xs-8">
+            <div class="box-nested">
+                <ul class="tree de-margin-top">
+                    <li collapsible>
+                        <input class="marker" type="checkbox" checked="checked">
+                        <label class="target"></label>
+                        <span class="item"> <i class="fa fa-book"></i> {{selectedScreenModel.id}} </span>
+
+                        <ul class="content" options="methodsTreeOptions" screen-model-tree tree-root>
+
+                            <li ng-repeat="method in methodsTree track by method.id" tree-node="method" collapsible></li>
+                        </ul>
+                    </li>
+
+                    <li collapsible>
+                        <input class="marker" type="checkbox" checked="checked">
+                        <label class="target"></label>
+                        <span class="item">
+                            <i class="fa fa-file-text-o"></i>
+                            Related Screens
+                        </span>
+                        <ul class="content" tree-root screens-tree options="relatedScreensTreeOptions">
+                            <li ng-repeat="screen in relatedScreens" tree-node="screen" collapsible></li>
+                        </ul>
+                    </li>
+
+                    <li collapsible>
+                        <input class="marker" type="checkbox" checked="checked">
+                        <label class="target"></label>
+                        <span class="item">
+                            <i class="fa fa-file-o"></i>
+                            Navigation
+                        </span>
+                        <ul class="content" tree-root screens-tree options="screensTreeOptions">
+                            <li ng-repeat="screen in screens" tree-node="screen" ng-if="!screen.system" collapsible></li>
+                        </ul>
+                    </li>
+
+                    <li collapsible>
+                        <input class="marker" type="checkbox" checked="checked">
+                        <label class="target"></label>
+                        <span class="item">
+                            <i class="fa fa-file-o"></i>
+                            Other actions
+                        </span>
+                        <ul class="content" options="otherActionsOptions" screen-model-tree tree-root>
+                            <li ng-repeat="action in otherActions" tree-node="action">Open menu</li>
+                        </ul>
+                    </li>
+
+                    <li collapsible>
+                        <input class="marker" type="checkbox" checked="checked">
+                        <label class="target"></label>
+                        <span class="item">
+                            <i class="fa fa-cogs"></i>
+                            Controller Methods
+                        </span>
+                        <ul class="content">
+                            <li ng-repeat="method in methods">
+                            <span class="item" ng-click="onMethodClick(method)" ng-dblclick="onMethodDblClick(method)" ng-class="{'selected': model.selectedValue.indexOf(method.substr(0, method.length - 1)) > -1 }">
+                                <i class="fa fa-cogs"></i>
+                                <span class="label">{{method.substr(0, method.length - 2)}}</span>
+                            </span>
+                            </li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+        <div class="col col-xs-4 no-padding-left">
+            <ul class="radio-tree" radio-tree tree="actionTimeoutTree" ng-model="model.actionTimeout" ng-show="isSelectedValueAction()">
+            </ul>
+            <span class="item padding-left" ng-show="isSelectedValueAction() || isSelectedValueMethod()">
+                <label>
+                    <input type="checkbox" ng-model="model.isAuthRequest">
+                    <span class="authRequest">Authentication request</span>
+                </label>
+            </span>
+            <span class="item padding-left" ng-show="isSelectedValueRelatedScreen()">
+                <label>
+                    <input type="checkbox" ng-model="model.refreshModel">
+                    Refresh Model
+                </label>
+            </span>
+        </div>
+    </div>
+
+
+    <form class="form" ng-switch-when="2">
+        <label class="form-control row">
+            <span class="col-xs-2">
+                <span class="label">URL:</span>
+            </span>
+            <span class="col-xs">
+                <input type="text" placeholder="http://" ng-model="model.selectedValue" url-input>
+            </span>
+        </label>
+    </form>
+
+</div>
+
+<div class="buttons">
+    <button class="button" ng-disabled="notValidSave()" ng-click="save()">Save</button>
+    <button class="button clear" ng-click="closeThisDialog()">Cancel</button>
+</div>

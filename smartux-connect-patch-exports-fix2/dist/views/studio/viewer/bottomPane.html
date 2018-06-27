@@ -1,0 +1,40 @@
+<div class="pane pane-with-tabs pane-bottom">
+    <div class="tabs">
+
+        <div class="tab" ng-repeat-start="(screenId, source) in sources" ng-if="shouldShowTab(screenId)">
+            <input type="radio" id="tab-template-{{screenId}}" class="marker" value="template-{{screenId}}" ng-model="selectedScreen.activeTab">
+            <label for="tab-template-{{screenId}}" class="target">
+                <span class="title"><i class="fa fa-code"></i>Template</span>
+            </label>
+            <div class="content">
+                <div id="editor-view" class="monaco-container" monaco-editor ng-readonly="true" mode="'html'" ng-model="source.html" on-load="editorLoaded(editor)" data-screen-id="{{screenId}}">
+                </div>
+            </div>
+        </div>
+
+        <div class="tab" ng-if="shouldShowTab(screenId)">
+            <input type="radio" id="tab-controller-{{screenId}}" class="marker" value="controller-{{screenId}}" ng-model="selectedScreen.activeTab">
+            <label for="tab-controller-{{screenId}}" class="target">
+                <span class="title"><i class="fa fa-cogs"></i>Controller</span>
+            </label>
+            <div class="content">
+                <div id="editor-ctrl" class="monaco-container" ng-readonly="true" monaco-editor mode="'typescript'" ng-model="source.ts" on-load="editorLoaded(editor)" data-screen-id="{{screenId}}">
+                </div>
+            </div>
+        </div>
+
+        <div ng-repeat-end class="tab" ng-if="shouldShowTab(screenId)">
+            <input type="radio" id="tab-scss-{{screenId}}" class="marker" value="scss-{{screenId}}" ng-model="selectedScreen.activeTab">
+            <label for="tab-scss-{{screenId}}" class="target">
+                <span class="title">
+                    <span class="title"><i class="fa fa-picture-o"></i>Styles</span>
+                </span>
+            </label>
+            <div class="content">
+                <div id="editor-scss" class="monaco-container" ng-readonly="true" monaco-editor mode="'scss'" ng-model="source.scss" on-load="editorLoaded(editor)" data-screen-id="{{screenId}}">
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

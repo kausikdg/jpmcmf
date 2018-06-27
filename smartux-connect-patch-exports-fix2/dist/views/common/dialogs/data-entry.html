@@ -1,0 +1,117 @@
+<div class="heading">
+    <h1>{{isEditing ? 'Modify' : 'New'}} Model Entry</h1>
+</div>
+
+<div class="content">
+    <form class="form">
+
+        <label class="form-control row">
+            <span class="col-xs-3">
+                <span class="label">Name:</span>
+            </span>
+            <span class="col-xs">
+                <input type="text" ng-model="model.newName" auto-focus>
+            </span>
+        </label>
+
+        <span class="form-control row">
+            <span class="col-xs-3">
+                <span class="label">Type:</span>
+            </span>
+            <table class="table inline-block col-xs">
+                <tr>
+                    <td class="padding-right">
+                        <label class="block">
+                            <input type="radio" ng-model="model.type" value="string">
+                                String
+                        </label>
+                        <label class="block">
+                            <input type="radio" ng-model="model.type" value="boolean">
+                                Boolean
+                        </label>
+                        <label class="block" ng-if="isPageModel()">
+                            <input type="radio" ng-model="model.type" value="identifier">
+                                Identifier
+                        </label>
+                        <label class="block" ng-if="!isPageModel()">
+                            <input type="radio" ng-model="model.type" value="date">
+                                Date
+                        </label>
+                        <label class="block" ng-if="!isPageModel()">
+                            <input type="radio" ng-model="model.type" value="time">
+                                Time
+                        </label>
+                    </td>
+                    <td class="padding-right padding-left">
+                        <label class="block">
+                            <input type="radio" ng-model="model.type" value="select">
+                                Select
+                        </label>
+                        <label class="block">
+                            <input type="radio" ng-model="model.type" value="object">
+                                Object
+                        </label>
+                        <label class="block">
+                            <input type="radio" ng-model="model.type" value="object[]">
+                                Object Array
+                        </label>
+                    </td>
+                    <td class="padding-right padding-left">
+                        <label class="block">
+                            <input type="radio" ng-model="model.type" value="action">
+                                Action
+                        </label>
+                        <label class="block">
+                            <input type="radio" ng-model="model.type" value="method">
+                                Method
+                        </label>
+                        <label class="block" ng-if="!isPageModel()">
+                            <input type="radio" ng-model="model.type" value="model">
+                                Shared Model
+                        </label>
+                        <label class="block" ng-if="isPageModel()">
+                            <input type="radio" ng-model="model.type" value="descriptor">
+                                Page Model
+                        </label>
+                    </td>
+                </tr>
+            </table>
+        </span>
+
+        <label class="form-control row" ng-if="isPageModel() && model.type==='descriptor'">
+            <span class="col-xs-3">
+                <span class="label">Model:</span>
+            </span>
+            <span class="col-xs">
+                <select ng-options="pageModel as pageModel for pageModel in pageModels" ng-model="model.descriptor"></select>
+            </span>
+        </label>
+
+        <label class="form-control row" ng-if="!isPageModel() && model.type==='model'">
+            <span class="col-xs-3">
+                <span class="label">Shared Model:</span>
+            </span>
+            <span class="col-xs">
+                <select ng-options="sharedModel as sharedModel for sharedModel in sharedModels" ng-model="model.model"></select>
+            </span>
+        </label>
+
+        <label class="form-control row" ng-if="model.type==='date' || model.type==='time'">
+            <span class="col-xs-3">
+                <span class="label">Format:</span>
+            </span>
+            <span class="col-xs">
+                <input type="text" ng-if="model.type==='date'" ng-init="model.format = model.format || 'YYYY-MM-DD'" ng-model="model.format">
+                <input type="text" ng-if="model.type==='time'" ng-init="model.format = model.format || 'HH:mm'" ng-model="model.format">
+            </span>
+        </label>
+
+    </form>
+</div>
+
+<div class="buttons">
+    <button class="button" ng-click="submit()" ng-disabled="submitted || !isValid()">{{isEditing ? 'Save' : 'Create'}}
+    </button>
+    <button class="button clear" ng-click="closeThisDialog()">Cancel
+    </button>
+</div>

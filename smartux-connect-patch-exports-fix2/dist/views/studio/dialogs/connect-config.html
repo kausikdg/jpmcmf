@@ -1,0 +1,47 @@
+<div class="heading">
+    <h1>Connect Settings</h1>
+</div>
+
+<div class="content">
+    <h1>SmartUX Connect Version</h1>
+    <select class="smartux-version" ng-model="model.connectVersion" ng-options="version for version in versions">
+    </select>
+    <h1>Manage Connectors</h1>
+    <div ng-repeat="connector in activeConnectors">
+        <button class="dropdown-toggle" ng-click="editSettings(connector)">
+            <img ng-if="connector.type == 'api'" ng-src="{{connector.iconUri}}" height="25px" width="25px">
+            <span ng-if="connector.type == 'web'" class="fa fa fa-crosshairs"></span>
+            <span class="value">{{ connector.settings.name }}</span>
+            <span class="version" ng-show="connector.version">({{ connector.version }})</span>
+            <i ng-if="connector.missingRequired" style="color:red;margin-left:5px;" class="fa fa-exclamation"></i>
+            <i ng-if="connector.type == 'api'" class="fa fa-cog"></i>
+        </button>
+        <span class="controls button" ng-click="showAddConnectorMenu()" ng-show="availableConnectors.length">
+            <i class="fa fa-plus"></i>
+        </span>
+        <span class="controls button" ng-click="removeActiveConnector(connector)">
+            <i class="fa fa-minus"></i>
+        </span>
+    </div>
+    <button class="dropdown-toggle" ng-click="showDropdown=!showDropdown" ng-blur="onBlur()" ng-if="addingConnector">
+
+        <span class="label">Select a Connector</span>
+        <i class="fa fa-caret-down"></i>
+
+        <ul class="dropdown-menu" ng-show="showDropdown">
+            <li ng-repeat="connector in availableConnectors | orderBy: '$i'" ng-click="addActiveConnector(connector)">
+                <img ng-if="connector.type == 'api'" ng-src="{{connector.iconUri}}" style="height:32px;width:32px;">
+                <span ng-if="connector.type == 'web'" class="fa fa fa-crosshairs"></span>
+                <span class="label">{{connector.settings.name}}</span>
+                <span class="description">{{connector.settings.description}}</span>
+            </li>
+        </ul>
+    </button>
+</div>
+
+<div class="buttons">
+    <button class="button" ng-click="submit()" ng-disabled="submitted || !isValid()">OK
+    </button>
+    <button class="button clear" ng-click="closeThisDialog()">Cancel
+    </button>
+</div>

@@ -1,0 +1,19 @@
+<div class="heading">
+    <h1>
+        Condition Builder
+    </h1>
+</div>
+<div class="content condition-builder">
+    <conditions condition-data="conditionData" event-area="eventArea">
+    </conditions>
+</div>
+
+<hr>
+<div class="buttons">
+    <button class="button" ng-disabled="!conditionsValid()" ng-click="save()">
+        Save
+    </button>
+    <button class="button clear" ng-click="close()">
+        Close
+    </button>
+</div>

@@ -1,0 +1,59 @@
+<div class="pane pane-with-tabs pane-bottom">
+    <div class="tabs">
+
+        <div class="tab">
+            <input type="radio" id="tab-template" class="marker" value="template" ng-model="selectedScreen.activeTab">
+            <label for="tab-template" class="target">
+                <span class="title"><i class="fa fa-code"></i>Template</span>
+            </label>
+            <div class="content">
+                <div id="editor-view" class="monaco-container" monaco-editor mode="'html'" ng-model="sources.html" on-load="editorLoaded(editor)" ng-change="htmlChanged(editor)">
+                </div>
+            </div>
+        </div>
+
+        <div class="tab">
+            <input type="radio" id="tab-controller" class="marker" value="controller" ng-model="selectedScreen.activeTab">
+            <label for="tab-controller" class="target">
+                <span class="title">
+                    <i class="fa fa-cogs"></i>{{selectedScreen.id === '__BASE__' ? 'Base Class' : 'Controller'}}
+                </span>
+            </label>
+            <div class="content">
+                <div id="editor-ctrl" class="monaco-container" monaco-editor mode="'typescript'" ng-model="sources.ts" on-load="editorLoaded(editor)" ng-change="typescriptChanged(editor)">
+                </div>
+            </div>
+        </div>
+
+        <div class="tab" ng-if="sources.appHooks">
+            <input type="radio" id="tab-appHooks" class="marker" value="appHooks" ng-model="selectedScreen.activeTab">
+            <label for="tab-appHooks" class="target">
+                <span class="title"><i class="fa fa-cogs"></i>App Hooks</span>
+            </label>
+            <div class="content">
+                <div id="editor-appHooks" class="monaco-container" monaco-editor mode="'typescript'" ng-model="sources.appHooks" on-load="editorLoaded(editor)" ng-change="appHooksChanged(editor)">
+                </div>
+            </div>
+        </div>
+
+        <div class="tab">
+            <input type="radio" id="tab-scss" class="marker" value="scss" ng-model="selectedScreen.activeTab">
+            <label for="tab-scss" class="target">
+                <span class="title">
+                    <span class="title"><i class="fa fa-picture-o"></i>Styles</span>
+                </span>
+            </label>
+            <div class="content">
+                <div id="editor-scss" class="monaco-container" monaco-editor mode="'scss'" ng-model="sources.scss" on-load="editorLoaded(editor)" ng-change="scssChanged(editor)">
+                </div>
+            </div>
+        </div>
+
+        <div class="spacer"></div>
+
+        <div class="tab right" ui-view="mockdata"></div>
+        <div class="tab right" ui-view="mockactions"></div>
+        <div class="tab right" ui-view="styles" ng-if="app.isApp"></div>
+
+    </div>
+</div>

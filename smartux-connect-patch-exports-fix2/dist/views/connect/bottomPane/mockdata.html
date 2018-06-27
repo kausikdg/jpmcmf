@@ -1,0 +1,29 @@
+<input type="radio" id="tab-mockdata" class="marker" value="mockdata-{{selectedScreen.id}}" ng-model="selectedScreen.activeTab">
+<label for="tab-mockdata" class="target">
+    <span class="title"><i class="fa fa-table"></i>Mock Data</span>
+</label>
+
+<div class="content">
+    <div class="pane">
+        <div class="pane-block height-full">
+            <div class="header target">
+                <span>Data</span>
+                <button class="fa fa-refresh" ng-click="refreshMockData()" title="Refresh mock data"></button>
+            </div>
+            <div class="content no-padding">
+                <ul class="tree" tree-root options="mocksListOptions">
+                    <li ng-repeat="file in filesList" tree-node="file" collapsible></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="ace-mock-data" ng-if="fileId !== null" ng-model="openedFiles[fileId].source" ui-ace="{
+            theme: 'chrome',
+            mode: 'json',
+            onChange: fileChanged,
+            onLoad: aceLoaded,
+            advanced: {fontSize: '14px'}
+    }"></div>
+
+</div>

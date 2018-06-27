@@ -1,0 +1,22 @@
+<div class="heading">
+        <h1>
+            Select Screen
+        </h1>
+    </div>
+
+    <div class="content">
+        <!-- screens tree -->
+        <ul class="tree" tree-root screens-tree options="modelTreeOptions">
+            <li ng-repeat="screen in screens" tree-node="screen" ng-if="!isHidden(screen)" collapsible></li>
+            <ng-include src="'/views/common/directives/tree/treeEditNode.html'" ng-if="edit"></ng-include>
+        </ul>
+    </div>
+
+    <div class="buttons">
+        <button class="button" ng-click="save()">
+            Save
+        </button>
+        <button class="button clear" ng-click="close()">
+            Close
+        </button>
+    </div>

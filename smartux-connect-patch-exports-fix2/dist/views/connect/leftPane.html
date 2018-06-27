@@ -1,0 +1,15 @@
+<div class="pane pane-left connect">
+
+    <div class="app-name">
+        <span>{{app.name}}</span>
+    </div>
+
+    <div class="pane-block" ui-view="screens" ng-show="globals.activePane === 'sources'"></div>
+
+    <div class="pane-block" ui-view="events" ng-show="globals.activePane === 'events'"></div>
+
+    <div class="pane-block" ui-view="blocks" ng-show="globals.activePane === 'blocks'"></div>
+
+    <div class="pane" ui-view="allFiles" ng-show="globals.activePane === 'allFiles'"></div>
+
+</div>

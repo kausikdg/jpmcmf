@@ -1,0 +1,13 @@
+<div class="heading">
+    <h1>{{title || 'Unsaved changes'}}</h1>
+</div>
+
+<div class="content">
+    {{message || 'Do you want to save changes?'}}
+</div>
+
+<div class="buttons">
+    <button class="button" ng-click="save();closeThisDialog()">Save</button>
+    <button class="button clear" ng-click="discard();closeThisDialog()" ng-if="!noDiscard">Discard</button>
+    <button class="button clear" ng-click="cancel();closeThisDialog()">Cancel</button>
+</div>

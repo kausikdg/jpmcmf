@@ -1,0 +1,32 @@
+<div class="heading">
+    <h1>{{propName}} Array</h1>
+</div>
+
+<div class="content">
+    <form class="form">
+        <label class="form-control row" ng-repeat="option in option.items">
+            <span ng-class="option.type === 'number' ? 'col-xs-3' : 'col-xs-6'">
+                <div ng-include="pluginOptionTemplate" ng-switch="option.type"></div>
+            </span>
+            <span ng-class="col-xs-3">
+                <button class="button small-btn row-button" ng-click="deleteRow($index)">
+                    <i class="fa fa-minus-circle"></i>
+                </button>
+            </span>
+        </label>
+        <label class="form-control row">
+            <span ng-class="col-xs-3">
+                <button ng-click="addRow()" class="button small-btn col-button">
+                    <i class="fa fa-plus-circle"></i> Add Row
+                </button>
+            </span>
+        </label>
+    </form>
+</div>
+
+<div class="buttons">
+    <button class="button" ng-click="save()" ng-disabled="submitted || !isValid()">Save
+    </button>
+    <button class="button clear" ng-click="closeThisDialog()">Cancel
+    </button>
+</div>

@@ -1,0 +1,22 @@
+<div class="pane pane-left explorer">
+
+    <div class="app-name">
+        <span>{{app.id}} > {{app.explorationId}}</span>
+    </div>
+
+    <div class="pane-block" ng-if="globals.activePane === 'pageModels'">
+        <div ui-layout="{ flow : 'row', dividerSize: 5}">
+            <div ui-layout-container size="325px" ui-view="pages">
+            </div>
+
+            <div ui-layout-container ui-view="events">
+            </div>
+
+            <div ui-layout-container size="25px" max-size="30px" min-size="25px" ui-view="statusbar">
+            </div>
+        </div>
+    </div>
+
+    <div class="pane" ui-view="allFiles" ng-show="globals.activePane === 'xFiles'"></div>
+        
+</div>

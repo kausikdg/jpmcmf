@@ -1,0 +1,26 @@
+<div class="heading">
+    <h1>Update Versions</h1>
+</div>
+
+<div class="content">
+    <form class="form">
+        <label class="form-control row">
+            This application cannot be opened because the version is not supported.
+            You can continue by automatically upgrading to a supported version, or
+            cancel to leave the project unmodified.
+        </label>
+        <label class="form-control row" ng-if="!model.clientVersionExists || model.clientVersionOutdated">
+            <span class="label">Client version will be updated to: {{clientVersion}}</span>
+        </label>
+        <label class="form-control row" ng-if="!model.serverVersionExists || model.serverVersionOutdated">
+            <span class="label">Server version will be updated to: {{serverVersion}}</span>
+        </label>
+    </form>
+</div>
+
+<div class="buttons">
+    <button class="button" ng-click="submit()">Upgrade
+    </button>
+    <button class="button clear" ng-click="cancel()">Cancel
+    </button>
+</div>

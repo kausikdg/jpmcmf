@@ -1,0 +1,36 @@
+<div class="heading">
+    <h1>{{dialogTitle}}</h1>
+</div>
+
+<div class="content">
+    <div class="tabs">
+
+        <div class="tab" ng-repeat="(mockSet, tab) in tabs">
+            <input type="radio" id="edit-mocks-{{mockSet}}" class="marker" value="{{mockSet}}" ng-model="dialog.activeTab">
+            <label for="edit-mocks-{{mockSet}}" class="target">
+                <span class="title"><i class="fa fa-table"></i>{{mockSet}}</span>
+                <i ng-if="mockSet === 'default'" class="fa"></i>
+                <i ng-if="mockSet !== 'default'" class="fa fa-pencil" ng-click="renameMockSet(mockSet)"></i>
+                <i ng-if="mockSet !== 'default'" class="fa fa-trash" ng-click="deleteMockSet(mockSet)"></i>
+            </label>
+            <div class="content" ng-include="tableTemplate"></div>
+        </div>
+
+        <div class="tab">
+            <label class="target" ng-click="createMockSet()">
+                <span class="title"><i class="fa fa-plus-circle"></i></span>
+                &nbsp;
+            </label>
+        </div>
+
+    </div>
+</div>
+
+<div class="buttons">
+    <button class="button" ng-click="save()">
+        Save
+    </button>
+    <button class="button clear" ng-click="closeThisDialog()">
+        Cancel
+    </button>
+</div>

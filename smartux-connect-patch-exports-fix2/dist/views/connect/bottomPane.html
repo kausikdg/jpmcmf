@@ -1,0 +1,16 @@
+<div class="pane pane-bottom pane-with-tabs">
+        <div class="tabs">
+
+            <div class="tab">
+                <input type="radio" id="tab-javascript-{{selectedEndpoint.id}}" class="marker" value="javascript-{{selectedEndpoint.id}}" ng-model="selectedEndpoint.activeTab">
+                <label for="tab-javascript-{{selectedEndpoint.id}}" class="target">
+                    <span class="title"><i class="fa fa-code"></i>JavaScript</span>
+                </label>
+                <div class="content">
+                    <div id="editor-view" class="monaco-container" monaco-editor mode="'javascript'" ng-model="source.js" on-load="editorLoaded(editor)" ng-change="jsChanged(editor)" data-endpoint-id="{{selectedEndpoint.id}}">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>

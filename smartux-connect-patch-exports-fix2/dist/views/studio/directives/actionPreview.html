@@ -1,0 +1,7 @@
+<select ng-model="selectedChoice" ng-options="choice as choice.label for choice in choices" ng-change="actionChanged()">
+</select>
+<select ng-if="selectedChoice.value === 'goto'" ng-model="model.selectedScreenId" ng-change="screenChanged()">
+    <option ng-repeat-start="screen in screens" ng-if="!screen.folder" value="{{screen.id}}" ng-selected="model.selectedScreenId === screen.id">{{screen.name}}</option>
+    <optgroup ng-repeat-end ng-if="screen.folder" label="{{screen.name}}"></optgroup>
+</select>
+<select ng-if="selectedChoice.value === 'mockset'" ng-model="model.selectedMockSet" ng-options="mockSet as mockSet for mockSet in mockSets" ng-change="mocksetChanged()"></select>

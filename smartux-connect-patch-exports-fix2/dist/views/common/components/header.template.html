@@ -1,0 +1,36 @@
+<div class="logo left">
+    <a ng-if="$ctrl.title === 'Explorer'">
+        <explorer class="explorer-container" app="app" hide-title="true" src="images/App-Explorer-White.png"></explorer></a>
+    <a ng-click="$ctrl.about()">
+        <img ng-src="images/App-{{$ctrl.title}}-White.png" ng-if="$ctrl.title && $ctrl.title !== 'Explorer'">
+        <h1>SmartUX&trade; {{$ctrl.title}}</h1></a>
+</div>
+
+<div class="logo mid" ng-if="!$ctrl.noModules">
+    <a ng-repeat="module in $ctrl.modules | filter:'!'+$ctrl.title" ng-click="$ctrl.open(module)" title="SmartUX&trade; {{module}}">
+        <img ng-src="images/App-{{module}}-White.png" ng-if="module !== 'Explorer'">
+        <explorer class="explorer-container" ng-if="module === 'Explorer'" src="images/App-Explorer-White.png"></explorer>
+    </a>
+</div>
+
+<div class="logo right">
+    <a href="https://www.powwowmobile.com" target="_blank">
+        <img src="images/header-logo.png"></a>
+</div>
+
+<ng-transclude></ng-transclude>
+
+<div class="tabs-wrap" ng-style="$ctrl.tabsMargin">
+    <div class="tabs empty">
+        <div class="tab" ng-repeat="tab in $ctrl.tabs | orderBy:'isSticky' ">
+            <input type="radio" name="header-tab" id="header-tab-{{tab.id}}" class="marker" value="{{tab.id}}" ng-class="{'selected': $ctrl.isTabSelected({tab: tab})}" ng-checked="$ctrl.isTabSelected({tab: tab})" ng-disabled="true">
+            <label for="header-tab-{{tab.id}}" class="target">
+                    <span class="title" title="{{tab.name}}" ng-class="{'italic': !tab.isSticky}" ng-click="$ctrl.onTabClick({tab: tab})" ng-dblclick="$ctrl.onTabDoubleClick({tab: tab})">
+                        <i class="fa" ng-class="$ctrl.tabIcon({tab:tab})"></i>{{tab.name}}
+                    </span>
+                <b ng-if="tab.isDirty" class="asterisk">*</b>
+                <i class="fa fa-times" ng-click="$ctrl.onTabClose({tab: tab})"></i>
+            </label>
+        </div>
+    </div>
+</div>

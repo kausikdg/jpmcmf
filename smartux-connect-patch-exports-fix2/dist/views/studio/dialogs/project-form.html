@@ -1,0 +1,45 @@
+<div class="heading ng-tabs">
+    <span class="ng-tab" ng-class="{active: activeTab == 'settings'}" ng-click="activeTab = 'settings'">{{getDialogTitle()}}</span>
+    <span class="ng-tab" ng-class="{active: activeTab == 'sdks'}" ng-click="activeTab = 'sdks'">SDKs</span>
+    <span class="ng-tab" ng-class="{active: activeTab == 'assets'}" ng-click="activeTab = 'assets'" ng-show="isEditing">Assets</span>
+</div>
+
+<div class="content" ng-if="isEditing && activeTab == 'assets'">
+    <ng-include src="'views/studio/dialogs/project-form/assets.html'"></ng-include>
+</div>
+
+<div class="content" ng-if="activeTab == 'sdks'">
+    <ng-include src="'views/studio/dialogs/project-form/sdks.html'" ng-controller="ProjectFormSdksCtrl"></ng-include>
+</div>
+
+<div class="content" ng-if="activeTab == 'settings'">
+    <ng-include src="'views/studio/dialogs/project-form/settings.html'" ng-controller="ProjectFormSettingsCtrl"></ng-include>
+</div>
+
+<div class="content secondary-content" ng-if="!isEditing && activeTab == 'settings'">
+    <ng-include src="'views/studio/dialogs/project-form/templates.html'" ng-controller="ProjectFormTemplatesCtrl"></ng-include>
+</div>
+
+<div class="buttons">
+    <button class="button button-danger outline pull-left" ng-if="isEditing" ng-click="delete()" ng-disabled="submitted">Delete App
+    </button>
+    <button class="button outline pull-left margin-left" ng-if="isEditing" ng-click="export()" ng-disabled="submitted">Export to ZIP file
+    </button>
+    <button class="button" ng-if="!isEditing" ng-click="create()" ng-disabled="submitted || !model.sourceAppId || !isValid()">Create
+    </button>
+    <button class="button" ng-if="isEditing" ng-click="save()" ng-disabled="submitted || !isValid()">Save
+    </button>
+    <button class="button clear" ng-click="cancel()">Cancel
+    </button>
+
+    <div class="form inline" ng-if="!(isEditing || withRepo) && activeTab == 'settings'">
+        <div class="form-control">
+            <label>
+                <span class="label">Versioning Enabled:</span>
+                <span class="spacing"></span>
+                <input type="checkbox" ng-model="model.isVersioned">
+            </label>
+        </div>
+    </div>
+
+</div>

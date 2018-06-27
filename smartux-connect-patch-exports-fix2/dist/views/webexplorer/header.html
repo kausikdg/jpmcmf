@@ -1,0 +1,35 @@
+<header class="studio explorer" title="Explorer" layout-sizes="globals.layout" tabs-data="openedTabs" is-tab-selected="isSelected(tab)" tab-icon="'fa-file-text-o'" on-tab-click="selectTab(tab)" on-tab-close="closeTab(tab)">
+
+    <div class="controls">
+        <div class="item" ng-class="{active: globals.devtoolsOpened}">
+            <i class="fa fa-code" ng-click="toggleDevtools()"></i>
+            <ul class="dropdown">
+                <li>
+                    <span>View Console</span>
+                </li>
+            </ul>
+        </div>
+        <div class="item" ng-class="{active: globals.extractionMode}">
+            <i class="fa fa-bullseye" ng-click="toggleExtractionMode()"></i>
+            <ul class="dropdown">
+                <li>
+                    <span>Extraction Mode</span>
+                </li>
+            </ul>
+        </div>
+        <div class="item" ng-class="{active: devtools.restarting}">
+            <i class="fa fa-repeat" ng-click="restartBrowser()"></i>
+            <ul class="dropdown">
+                <li>
+                    <span>Restart Browser</span>
+                </li>
+            </ul>
+        </div>
+        <div class="item main">
+            <span ng-click="save()">Save
+                <span class="badge" ng-if="batch.count() > 0">
+                    {{batch.count()}}</span>
+            </span>
+        </div>
+    </div>
+</header>

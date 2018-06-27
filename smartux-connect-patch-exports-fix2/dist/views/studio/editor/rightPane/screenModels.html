@@ -1,0 +1,32 @@
+<div class="pane">
+    <div class="pane-block">
+        <div class="header">
+            <span>
+                {{app.isApp ? 'Screen' : 'Template'}} Model: {{screenModel.id || 'none'}}
+            <b class="asterisk" ng-if="checkIsDirty()">*</b>
+            </span>
+            <button class="fa fa-pencil" ng-click="editScreenModels()" title="Edit Screen Model"></button>
+            <button class="fa fa-refresh" ng-click="refreshScreenModels()" title="Refresh Screen Model"></button>
+            <button class="fa fa-table" ng-class="{active: previewMode}" ng-click="togglePreview()" title="Preview Mocks"></button>
+        </div>
+
+        <div class="content no-padding horizontal-scroll">
+            <ul class="tree flexible box">
+                <li ng-if="screenModel">
+                    <span class="item padding-left">
+                        <i class="fa fa-cogs"></i>
+                        <span class="label">{{screenModel.id}}</span>
+                        <select ng-if="previewMode" ng-model="model.selectedMockSet" ng-options="mockSet as mockSet for mockSet in model.mockSets" ng-change="changeMockSet()"></select>
+                        <button class="button icon fa fa-plus" ng-if="previewMode" title="New Mock Set" ng-click="addMockSet()"></button>
+                        <span class="controls visible" ng-if="!previewMode">
+                            <button class="fa fa-plus" title="New Data Entry" ng-click="addDataEntry(screenModel)"></button>
+                        </span>
+                    </span>
+                    <ul preview-tree options="treeOptions" tree-root>
+                        <li class="box" ng-repeat="prop in screenModel.properties" tree-node="prop" collapsible></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

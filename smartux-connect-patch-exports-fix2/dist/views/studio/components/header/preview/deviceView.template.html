@@ -1,0 +1,39 @@
+<li>
+    <i class="fa fa-caret-left"></i>
+    <span>Device View</span>
+    <ul class="dropdown">
+        <li ng-repeat="device in $ctrl.devices| filter:{type: 'phone'}">
+            <label>
+                <input type="radio" ng-model="$ctrl.model.device" ng-value="device.id" ng-click="$ctrl.changeDevice()">
+                {{device.name}}
+            </label>
+        </li>
+        <li class="splitter"></li>
+        <li ng-repeat="device in $ctrl.devices| filter:{type: 'tablet'}">
+            <label>
+                <input type="radio" ng-model="$ctrl.model.device" ng-value="device.id" ng-click="$ctrl.changeDevice()">
+                {{device.name}}
+            </label>
+        </li>
+        <li class="splitter"></li>
+        <li ng-repeat="device in $ctrl.devices| filter:{type: 'desktop'}">
+            <label>
+                <input type="radio" ng-model="$ctrl.model.device" ng-value="device.id" ng-click="$ctrl.changeDevice()">
+                {{device.name}}
+            </label>
+        </li>
+        <li class="splitter"></li>
+        <li>
+            <label>
+                <input type="radio" ng-model="$ctrl.model.landscape" ng-value="false" ng-click="$ctrl.changeDevice()">
+                Portrait
+            </label>
+        </li>
+        <li>
+            <label>
+                <input type="radio" ng-model="$ctrl.model.landscape" ng-value="true" ng-click="$ctrl.changeDevice()">
+                Landscape
+            </label>
+        </li>
+    </ul>
+</li>

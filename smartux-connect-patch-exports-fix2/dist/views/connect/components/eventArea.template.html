@@ -1,0 +1,41 @@
+<div ng-if="!$ctrl.eventarea.isCode()" class="event" drag-and-drop="{
+      draggable: false,
+      acceptedTypes: $ctrl.getAcceptedTypes(),
+      onEnter: $ctrl.onDragenter(),
+      onDrop: $ctrl.onDrop(),
+      onDragover: $ctrl.onDragover(),
+      onLeave: $ctrl.onDragleave(),
+      ignoreCounter: true
+    }" ng-class="{selected: $ctrl.eventarea.selected}" ng-click="$ctrl.selectEventArea($event)">
+    <div class="event-area-header" ng-mouseenter="$ctrl.showToolbar()" ng-mouseleave="$ctrl.hideToolbar()">
+        <div class="event-label">
+            <i class="fa fa-bolt icon-left"></i>{{$ctrl.eventarea.getLabel()}}
+            <span class="event-area-error">&nbsp; &nbsp; {{$ctrl.error}}</span>
+        </div>
+        <div class="event-toolbar" ng-show="$ctrl.eventarea.toolbarActive || $ctrl.eventarea.selected">
+            <button class="fa fa-cog" ng-click="$ctrl.triggerBuilder($event)"></button>
+            <button class="fa fa-arrow-down" ng-click="$ctrl.moveDown($event)" ng-disabled="$ctrl.isLastEventArea()"></button>
+            <button class="fa fa-arrow-up" ng-click="$ctrl.moveUp($event)" ng-disabled="$ctrl.isFirstEventArea()"></button>
+            <button class="fa fa-remove" ng-click="$ctrl.deleteEventArea($event)"></button>
+        </div>
+    </div>
+    <div class="event-area" ng-class="{fake: $ctrl.eventarea.fake, yellow: $ctrl.eventarea.yellow}">
+        <connect-node ng-repeat="block in $ctrl.eventarea.getRootContextBody()" current-block="block" event-area="$ctrl.eventarea" is-last="$last">
+        </connect-node>
+    </div>
+</div>
+<div class="event" ng-if="$ctrl.eventarea.isCode()" ng-class="{selected: $ctrl.eventarea.selected}" ng-click="$ctrl.selectEventArea($event)">
+    <div class="event-area-header" ng-mouseenter="$ctrl.showToolbar()" ng-mouseleave="$ctrl.hideToolbar()">
+        <div class="event-label" ng-click="$ctrl.selectEventArea($event)">
+            <i class="fa fa-code icon-left"></i>Code Area
+        </div>
+        <div class="event-toolbar" ng-show="$ctrl.eventarea.toolbarActive || $ctrl.eventarea.selected">
+            <button class="fa fa-arrow-down" ng-click="$ctrl.moveDown($event)" ng-disabled="$ctrl.isLastEventArea()"></button>
+            <button class="fa fa-arrow-up" ng-click="$ctrl.moveUp($event)" ng-disabled="$ctrl.isFirstEventArea()"></button>
+            <button class="fa fa-remove" ng-click="$ctrl.deleteEventArea($event)"></button>
+        </div>
+    </div>
+    <div class="event-area code" ng-if="$ctrl.eventarea.isCode()" ng-class="{fake: $ctrl.eventarea.fake, yellow: $ctrl.eventarea.yellow}" ng-click="selectEventArea($event)">
+        <div ng-bind="$ctrl.eventarea.getCodeString()"></div>
+    </div>
+</div>

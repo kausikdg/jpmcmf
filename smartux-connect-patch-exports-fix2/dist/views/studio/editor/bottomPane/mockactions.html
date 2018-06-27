@@ -1,0 +1,24 @@
+<input type="radio" id="tab-mockactions" class="marker" value="mockactions" ng-model="selectedScreen.activeTab">
+<label for="tab-mockactions" class="target">
+    <span class="title"><i class="fa fa-bolt"></i>Mock Actions</span>
+</label>
+
+<div class="content">
+    <div class="pane">
+        <div class="pane-block height-full">
+            <div class="header target">
+                <span>Actions</span>
+                <button class="fa fa-refresh" ng-click="refreshMockActions()" title="Refresh mock actions"></button>
+            </div>
+            <div class="content no-padding">
+                <ul class="tree" tree-root options="mocksListOptions">
+                    <li ng-repeat="file in filesList" tree-node="file" collapsible></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="editor-mock-actions" ng-if="fileId !== null" class="monaco-container" monaco-editor mode="'typescript'" on-load="editorLoaded(editor)" on-edit="onEdit" ng-model="openedSources[fileId].source" ng-change="fileChanged(editor)">
+    </div>
+
+</div>

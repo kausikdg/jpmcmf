@@ -1,0 +1,39 @@
+<header no-modules="true">
+
+    <ul class="tabs-menu">
+        <li>
+            <a ng-class="{active: currentState() === 'home.applications'}" ng-href="{{getLink('applications')}}"><i class="fa fa-th"></i>
+                <span class="header-label">Applications</span>
+            </a>
+        </li>
+        <li>
+            <a ng-class="{active: currentState() === 'home.templates'}" ng-href="{{getLink('templates')}}"><i class="fa fa-files-o"></i>
+                <span class="header-label">Templates</span>
+            </a>
+        </li>
+        <li ng-if="isAdmin">
+            <a ng-class="{active: currentState() === 'home.users'}" ng-href="{{getLink('users')}}"><i class="fa fa-user-circle"></i>
+                <span class="header-label">Users</span>
+            </a>
+        </li>
+    </ul>
+
+    <div class="controls">
+        <div class="item">
+            <span>{{name}}</span>
+            <i class="fa fa-caret-down"></i>
+            <ul class="dropdown">
+                <li>
+                    <span ng-click="logout()">Logout</span>
+                </li>
+            </ul>
+        </div>
+        <div class="item">
+            <i class="ion ion-md-help-circle" ng-click="help()"></i>
+        </div>
+    </div>
+
+</header>
+
+<ui-view></ui-view>
+

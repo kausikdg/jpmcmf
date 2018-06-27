@@ -1,0 +1,14 @@
+<div class="pane pane-left">
+
+    <div class="app-name">
+        <span>{{app.name}}</span>
+        <button class="fa fa-exclamation-triangle button-danger" ng-click="showBuildLog()" ng-if="app.buildError" title="Compile Error"></button>
+    </div>
+
+    <div class="pane-block" ui-view="screens" ng-show="globals.activePane === 'screens'"></div>
+
+    <div class="pane-block" ui-view="components" ng-show="globals.activePane === 'components'"></div>
+
+    <div class="pane" ui-view="allFiles" ng-show="globals.activePane === 'allFiles'"></div>
+
+</div>

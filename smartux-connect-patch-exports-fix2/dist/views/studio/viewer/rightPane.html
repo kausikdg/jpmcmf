@@ -1,0 +1,28 @@
+<div ui-layout="{ flow: 'row', dividerSize: 6}">
+
+    <div id="eastNorth" ui-layout-container size="{{$root.globals.layout.eastNorth}}">
+        <div class="pane pane-with-tabs">
+            <div class="tabs">
+                <div class="tab">
+                    <input type="radio" id="tab-models" class="marker" value="models" ng-model="ui.activeTab">
+                    <label for="tab-models" class="target">
+                        <span class="title"><i class="fa fa-database"></i>Models</span>
+                    </label>
+                    <div class="content" ui-view="screenModels"></div>
+                </div>
+                <div class="tab">
+                    <input type="radio" id="tab-outline" class="marker" value="outline" ng-model="ui.activeTab">
+                    <label for="tab-outline" class="target">
+                        <span class="title"><i class="fa fa-sitemap"></i>Outline</span>
+                    </label>
+                    <div class="content" ui-view="outline"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="eastSouth" ui-layout-container="central" class="pane">
+        <div class="pane-block" ui-view="propertySheet"></div>
+    </div>
+
+</div>

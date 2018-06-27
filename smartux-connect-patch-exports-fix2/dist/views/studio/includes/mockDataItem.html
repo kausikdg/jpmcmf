@@ -1,0 +1,30 @@
+<!-- string -->
+<textarea ng-switch-when="string" ng-if="_.isObject(row)" ng-model="row[col.name]" rows="1" msd-elastic></textarea>
+<textarea ng-switch-when="string" ng-if="!_.isObject(row)" ng-model="tab.rows[$parent.$index]" rows="1" msd-elastic></textarea>
+
+<!-- date -->
+<input type="date" ng-switch-when="date" ng-if="_.isObject(row)" ng-model="row[col.name]" date-format="{{propDef.format}}">
+<input type="date" ng-switch-when="date" ng-if="!_.isObject(row)" ng-model="tab.rows[$parent.$index]" date-format="{{propDef.format}}">
+
+<!-- time -->
+<input type="time" ng-switch-when="time" ng-if="_.isObject(row)" ng-model="row[col.name]" date-format="{{propDef.format}}">
+<input type="time" ng-switch-when="time" ng-if="!_.isObject(row)" ng-model="tab.rows[$parent.$index]" date-format="{{propDef.format}}">
+
+<!-- boolean -->
+<input type="checkbox" ng-switch-when="boolean" ng-if="_.isObject(row)" ng-model="row[col.name]">
+<input type="checkbox" ng-switch-when="boolean" ng-if="!_.isObject(row)" ng-model="tab.rows[$parent.$index]">
+
+<!-- array -->
+<button class="button small icon" ng-switch-when="array" ng-click="editChildProp(mockSet, index, col)">
+       <i class="fa fa-sitemap"></i>
+</button>
+
+<!-- object -->
+<button class="button small icon" ng-switch-when="object" ng-click="editChildProp(mockSet, index, col)">>
+       <i class="fa fa-sitemap"></i>
+</button>
+
+<!-- select -->
+<button class="button small icon" ng-switch-when="select" ng-click="editChildProp(mockSet, index, col)">>
+       <i class="fa fa-sitemap"></i>
+</button>

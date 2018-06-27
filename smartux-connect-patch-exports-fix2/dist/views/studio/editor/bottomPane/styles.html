@@ -1,0 +1,26 @@
+<input type="radio" id="tab-styles" class="marker" value="styles" ng-model="selectedScreen.activeTab">
+<label for="tab-styles" class="target last">
+    <span class="title"><i class="fa fa-picture-o"></i>Global Styles</span>
+</label>
+
+<div class="content">
+    <div class="pane">
+        <div class="pane-block height-full">
+            <div class="header target">
+                <span>SCSS</span>
+                <button class="fa fa-plus" ng-click="addFile()" title="Add file"></button>
+                <button class="fa fa-refresh" ng-click="refreshStyles()" title="Refresh files"></button>
+            </div>
+            <div class="content no-padding">
+                <ul class="tree plain" tree-root styles-tree options="stylesListOptions">
+                    <li ng-repeat="file in filesList" tree-node="file" collapsible></li>
+                    <ng-include ng-if="showAddFile" src="'/views/common/directives/tree/treeEditNode.html'"></ng-include>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div id="editor-styles" ng-if="fileId !== null" class="monaco-container" monaco-editor mode="'scss'" on-load="editorLoaded(editor)" ng-model="openedStyles[fileId].source" ng-change="fileChanged(editor)">
+    </div>
+
+</div>

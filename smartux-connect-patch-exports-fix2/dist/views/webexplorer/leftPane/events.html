@@ -1,0 +1,35 @@
+<div class="events-container pane pane-with-tabs">
+    <div class="tabs">
+        <div class="tab" ng-click="selectTab('selector')">
+            <input type="radio" id="selector" class="marker" value="selector" ng-model="activeTab">
+            <label for="selector" class="target">
+                <span class="title">
+                    <i class="fa fa-cog"></i>
+                    <span>Properties</span>
+                </span>
+            </label>
+            <div class="content" id="content" ui-view="selector" style="overflow:auto;"></div>
+        </div>
+        <div class="tab" ng-click="selectTab('events')">
+            <input type="radio" id="events" class="marker" value="events" ng-model="activeTab">
+            <label for="events" class="target">
+                <span class="title">
+                    <i class="fa fa-bolt"></i>
+                    <span>Events</span>
+                </span>
+            </label>
+
+            <div class="events content" id="content">
+                <div id="connect-buttons" ng-show="selected.pageModel.id">
+                    <button class="fa fa-bolt" title="Connect action" ng-click="connectAction()"></button>
+                    <button class="fa fa-file-code-o" title="Connect event" ng-click="connectEvent()"></button>
+                    <button class="fa fa-files-o" title="Connect screens" ng-click="connectScreens()"></button>
+                </div>
+                <ul class="tree no-margin box" tree-root options="treeOptions">
+                    <li class="box" tree-node="event" ng-repeat="event in selected.pageModel.connect" collapsible></li>
+                    <ng-include src="'/views/common/directives/tree/treeEditNode.html'" ng-if="edit"></ng-include>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+<div class="heading">
+    <h1>Image Manager</h1>
+    <label class="search">
+        <span class="fa fa-search"></span>
+        <input type="text" placeholder="Search" ng-model="model.search" ng-model-options="{debounce: 300}">
+    </label>
+</div>
+
+<div class="content">
+
+    <div>
+        <h2>Common Images</h2>
+        <div class="clearfix">
+            <div class="thumbnail upload" onclick="this.querySelector('input').click()">
+                <span class="content">Upload image</span>
+                <i class="fa fa-plus"></i>
+                <input type="file" accept="image/*" class="hidden" onchange="angular.element(this).scope().fileChanged(this, 'common')">
+            </div>
+            <div class="thumbnail" ng-repeat="img in imagesList.common | filter: model.search" ng-class="{'selected': isSelected(img)}" ng-click="selectImage(img)" ng-dblclick="selectAndSave(img)">
+                <div class="image-header">
+                    <div class="title" ng-bind-html="getFileName(img) | highlight: model.search"></div>
+                    <div class="control-item">
+                        <button class="fa fa-trash" title="Delete" ng-if="getFileName(img)!==defaultImageName" ng-click="delete(img);$event.stopPropagation();">
+                        </button>
+                    </div>
+                </div>
+                <img ng-src="{{serverUrl + '/assets/images/' + img + getQueryParams}}">
+            </div>
+        </div>
+    </div>
+
+    <div ng-if="imagesList.screen">
+        <h2>Screen Images</h2>
+        <div class="clearfix">
+            <div class="thumbnail upload" onclick="this.querySelector('input').click()">
+                <span class="content">Upload image</span>
+                <i class="fa fa-plus"></i>
+                <input type="file" accept="image/*" class="hidden" onchange="angular.element(this).scope().fileChanged(this, 'screen')">
+            </div>
+            <div class="thumbnail" ng-repeat="img in imagesList.screen | filter: model.search" ng-class="{'selected': isSelected(img)}" ng-click="selectImage(img)" ng-dblclick="selectAndSave(img)">
+                <div class="image-header">
+                    <div class="title" ng-bind-html="getFileName(img) | highlight: model.search"></div>
+                    <div class="control-item">
+                        <button class="fa fa-trash" title="Delete" ng-if="getFileName(img)!==defaultImageName" ng-click="delete(img);$event.stopPropagation();">
+                        </button>
+                    </div>
+                </div>
+                <img ng-src="{{serverUrl + '/assets/images/' + img + getQueryParams}}">
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="buttons">
+    <button class="button" ng-click="save()">Save</button>
+    <button class="button clear" ng-click="closeThisDialog();">Cancel</button>
+</div>

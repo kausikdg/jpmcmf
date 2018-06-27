@@ -1,0 +1,5 @@
+<div class="all-files-editor canvas-grid">
+    <div ng-if="$ctrl.selectedFile && !$ctrl.isFileImage()" monaco-editor ng-readonly="$ctrl.readonly" class="monaco-container" mode="$ctrl.getMode()" ng-change="$ctrl.fileChanged(editor)" ng-model="$ctrl.selectedFile.source">
+    </div>
+    <ng-transclude></ng-transclude>
+</div>

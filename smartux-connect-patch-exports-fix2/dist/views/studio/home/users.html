@@ -1,0 +1,29 @@
+<div class="subheader clearfix">
+    <search options="filter"></search>
+</div>
+
+<div class="content flex-child-grow">
+    <div class="cards users">
+        <span class="card focused" ng-click="newUser()">
+            <span class="title">New User</span>
+            <span class="spacer"></span>
+            <i class="fa fa-user-plus"></i>
+            <span class="spacer"></span>
+        </span>
+
+        <a class="card layouts-list" ng-repeat="user in users | filter:{ name: filter.searchText } | orderBy: filter.orderBy" ng-click="processUserClick(user)">
+
+            <span class="title" ng-bind-html="user.name | highlight: filter.searchText"></span>
+
+            <span class="spacer"></span>
+            <i class="fa fa-user-circle-o"></i>
+            <span class="spacer"></span>
+
+            <div class="card-footer">
+                <div class="tag assertive" ng-if="user.isAdmin">
+                    Admin
+                </div>
+            </div>
+        </a>
+    </div>
+</div>

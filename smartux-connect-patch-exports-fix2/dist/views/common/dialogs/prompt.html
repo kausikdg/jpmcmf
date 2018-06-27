@@ -1,0 +1,21 @@
+<div class="heading">
+    <h1>Enter required value</h1>
+</div>
+
+<div class="content">
+    <form class="form">
+        <label class="form-control row">
+            <span class="col-xs-4">
+                <span class="label">{{label}}:</span>
+            </span>
+            <span class="col-xs">
+                <input type="text" ng-model="model.value">
+            </span>
+        </label>
+    </form>
+</div>
+
+<div class="buttons">
+    <button class="button" ng-click="confirm()" ng-disabled="submitted">Confirm</button>
+    <button class="button clear" ng-click="closeThisDialog()">Cancel</button>
+</div>

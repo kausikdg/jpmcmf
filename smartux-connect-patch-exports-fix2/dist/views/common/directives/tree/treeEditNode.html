@@ -1,0 +1,10 @@
+<li class="edit">
+    <form ng-submit="isValid(edit) && confirmEditing(node)">
+        <i class="fa {{getIcon(node, true)}}"></i>
+        <button class="fa fa-ban" title="Cancel" type="reset" ng-click="cancel()"></button>
+        <button class="fa fa-check" title="Confirm" type="submit" ng-disabled="!isValid(edit)"></button>
+            <span class="input">
+                <input type="text" name="name" ng-model="edit.name" auto-focus>
+            </span>
+    </form>
+</li>

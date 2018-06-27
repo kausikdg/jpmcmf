@@ -1,0 +1,15 @@
+<header class="studio" title="Studio" layout-sizes="globals.layout" tabs-data="openedFiles" is-tab-selected="selectedFile.id === tab.id" tab-icon="'fa-file-text-o'" on-tab-click="selectFile(tab)" on-tab-double-click="stickFile(tab)" on-tab-close="closeFile(tab)">
+
+    <div class="controls">
+        <preview></preview>
+        <div class="item main">
+            <span ng-click="saveAll($event)">Save</span>
+            <ul class="dropdown">
+                <li>
+                    <span ng-click="saveAll()">Save All</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</header>

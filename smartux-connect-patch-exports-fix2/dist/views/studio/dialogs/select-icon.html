@@ -1,0 +1,31 @@
+<div class="heading">
+    <h1>Select Icon</h1>
+    <label class="search">
+        <span class="fa fa-search"></span>
+        <input type="text" placeholder="Search" ng-model="search.text" ng-model-options="{debounce: 300}" ng-change="filterIcons(search.text)">
+        <a ng-if="search.text && search.text !== ''" ng-click="search.text='';filterIcons('')"><i class="fa fa-times"></i> </a>
+    </label>
+</div>
+
+<div class="content">
+    <h2>Ion Icons</h2>
+    <div class="clearfix">
+        <span class="icon-wrap" ng-repeat="icon in ionIcons track by icon" ng-class="{selected: icon === model.value}" ng-click="model.value = icon">
+            <i class="icon {{::icon}}"></i>{{::icon}}
+        </span>
+    </div>
+
+    <h2>Font Awesome</h2>
+    <div class="clearfix">
+        <span class="icon-wrap" ng-repeat="icon in fontAwesome track by icon" ng-class="{selected: model.value === 'fa '+icon}" ng-click="model.value = 'fa '+icon">
+            <i class="fa {{::icon}}"></i>{{::icon}}
+        </span>
+    </div>
+</div>
+
+<div class="buttons">
+    <button class="button" ng-click="save()" ng-disabled="submitted || !isValid()">Save
+    </button>
+    <button class="button clear" ng-click="closeThisDialog()">Cancel
+    </button>
+</div>

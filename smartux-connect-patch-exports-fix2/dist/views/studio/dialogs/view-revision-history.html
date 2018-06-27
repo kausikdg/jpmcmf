@@ -1,0 +1,24 @@
+<div class="heading">
+    <h1>Revision History</h1>
+</div>
+
+<div class="content">
+    <div class="row padding" ng-repeat="version in appVersions" style="border-bottom: 1px solid #666">
+        <div class="col col-xs-3">
+            <div>{{version.author.name}}</div>
+            <div>{{version.date | date:'MM/dd/yyyy, HH:mm'}}</div>
+        </div>
+        <div class="col col-xs-7">
+            <div ng-if="!app.githubRepo">{{version.message}}</div>
+            <div ng-if="app.githubRepo">
+                <a href="{{app.githubRepo + '/' + 'commit/' + version.commit}}" class="commit-link" target="_blank">{{version.message}}</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="buttons">
+    <button class="button" ng-click="closeThisDialog()">
+        Close
+    </button>
+</div>

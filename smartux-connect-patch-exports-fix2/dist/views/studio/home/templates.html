@@ -1,0 +1,62 @@
+<div class="subheader clearfix">
+    <search options="filter"></search>
+</div>
+
+<div class="content">
+    <div class="cards applications" ng-repeat="section in templateSections">
+        <div class="section clearfix">{{ section.name }}</div>
+
+        <span class="card focused" ng-click="newTemplate(section.appTemplates)" ng-if="section.allowNew">
+            <span class="title">New {{section.newName}}</span>
+            <span class="spacer"></span>
+            <i class="fa fa-plus"></i>
+            <span class="spacer"></span>
+        </span>
+
+        <a class="card layouts-list" ng-repeat="app in applications | filter: section.filter | filter: filter.findByNameOrId | orderBy: filter.orderBy" ng-click="processAppClick(app)" ng-if="!app.hidden">
+
+            <span class="title" ng-bind-html="_.escape(app.name) | highlight: filter.searchText"></span>
+
+            <div class="subtitle" ng-if="app.creatorName">
+                <span><b>Creator:</b> {{app.creatorName}}</span>
+            </div>
+            <div class="subtitle">
+                <span><b>ID:</b> {{app.id}}</span>
+                <span class="versioned" ng-if="app.isVersioned">
+                    <i class="fa fa-git-square"></i>
+                </span>
+            </div>
+            <span class="spacer"></span>
+            <div class="layout-type margin-centered" ng-if="app.isAppTemplate">
+                <div class="app-icon" ng-if="getIconUrl(app)">
+                    <img ng-src="{{getIconUrl(app)}}">
+                </div>
+                <div class="icon {{getLayoutClass(app.defaultLayout)}}" ng-if="!getIconUrl(app)"></div>
+            </div>
+            <div class="template-type" ng-if="!app.isAppTemplate">
+                <div class="icon" ng-class="{single: app.screensCount === 1, double: app.screensCount === 2, triple: app.screensCount > 2}"></div>
+                <div class="quantity">
+                    <span>{{app.screensCount}}</span>
+                    Screen{{app.screensCount !== 1 ? 's' : ''}}
+                </div>
+            </div>
+            <div class="card-footer">
+                <span class="icon" ng-click="$event.stopPropagation(); openModule('Connect', app.id)" title="SmartUX&trade; Connect">
+                    <img src="images/App-Connect-Blue.png">
+                </span>
+                <span class="icon" ng-click="$event.stopPropagation(); ">
+                    <explorer class="explorer-container" app="app" src="images/App-Explorer-Blue.png"></explorer>
+                </span>
+                <span class="icon pull-right" ng-click="$event.stopPropagation(); previewApp(app)" title="Preview App">
+                    <i class="ion ion-ios-eye"></i>
+                </span>
+                <span class="icon pull-right" ng-click="$event.stopPropagation(); copyApp(app)" title="Copy App">
+                    <i class="ion ion-ios-copy-outline"></i>
+                </span>
+            </div>
+            <span class="tag" ng-if="app.clientVersion" ng-class="{assertive: !app.supported}">
+                {{app.clientVersion}}
+            </span>
+        </a>
+    </div>
+</div>

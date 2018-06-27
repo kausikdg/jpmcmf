@@ -1,0 +1,30 @@
+<div class="header">
+    <span>All Files</span>
+    <span class="search-bar screens" ng-if="$ctrl.showSearch">
+        <input type="text" placeholder="Search Files" ng-model="$ctrl.search.name" auto-focus>
+    </span>
+    <button class="fa fa-search" ng-click="$ctrl.showSearch = !$ctrl.showSearch" title="Search Files"></button>
+    <button class="fa fa-refresh" ng-click="$ctrl.refresh()" title="Refresh All Files"></button>
+    <button class="fa fa-folder-o" ng-click="$ctrl.addFolder()" title="Add Folder">
+        <i class="fa fa-plus icon-overlay"></i>
+    </button>
+    <button class="fa fa-file-text-o" ng-click="$ctrl.addFile()" title="Add File">
+        <i class="fa fa-plus icon-overlay"></i>
+    </button>
+</div>
+<div class="content no-padding">
+    <ul class="tree" tree-root options="$ctrl.treeOptions">
+        <li ng-repeat="file in $ctrl.filesTree.children | filterTree: $ctrl.search:'name':'children'" tree-node="file" collapsible>
+        </li>
+        <li class="edit" ng-if="$ctrl.edit">
+            <form ng-submit="$ctrl.isValid($ctrl.edit) && $ctrl.confirmEditing()">
+                <i class="fa {{$ctrl.getIcon(node, true)}}"></i>
+                <button class="fa fa-ban" title="Cancel" type="reset" ng-click="$ctrl.cancel()"></button>
+                <button class="fa fa-check" title="Confirm" type="submit" ng-disabled="!$ctrl.isValid($ctrl.edit)"></button>
+                <span class="input">
+                <input type="text" name="name" ng-model="$ctrl.edit.name" auto-focus>
+            </span>
+            </form>
+        </li>
+    </ul>
+</div>

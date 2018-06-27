@@ -1,0 +1,218 @@
+<div class="selector" ng-if="notEmpty()">
+    <div>
+        <span class="label">Name</span>
+        <div class="input">
+            <input ng-model="selected.field.name" ng-model-options="{updateOn:'blur'}" ng-change="updateProperty('{{selected.field.name}}')" placeholder="Property Name">
+        </div>
+    </div>
+    <div ng-if="selected.field.parent">
+        <span class="label">Type</span>
+        <div class="input">
+            <select ng-model="selected.field.type" ng-change="updateProperty(null, '{{selected.field.type}}')" ng-options="option.value as option.label for option in typeOptions" ng-init="selected.field.type = selected.field.type || typeOptions[0].value;">
+            </select>
+        </div>
+    </div>
+    <div ng-if="selected.field.type === 'descriptor'">
+        <span class="label">Page Model</span>
+        <div class="input">
+            <select ng-model="selected.field.descriptor" ng-change="updateNode('descriptor')" ng-options="option.name as option.name for option in pageModels | filter: filterModels ">
+            </select>
+        </div>
+    </div>
+
+    <!-- Find / Selector -->
+    <div class="header">
+        <span class="label fa fa-search"> Find</span>
+        <span class="right fa fa-cogs" ng-click="viewFind()" title="View Find"></span>
+    </div>
+
+    <div>
+        <span class="label">{{(model.singleNode || model.multipleNodes) ? model.altKey : model.selectorKey}}
+            <span ng-if="model.hasError" style="color: red">*</span>
+        </span>
+        <span class="label" ng-if="!model.hasError" style="color: lightgray">({{model.count}})</span>
+        <div class="input">
+            <textarea msd-elastic ng-if="!isComplex.selector
+                        && selected.field.hasOwnProperty('selector')" ng-model="selected.field.selector" ng-model-options="{updateOn: 'blur'}" ng-change="checkSelector('selector')">
+            </textarea>
+        </div>
+        <div class="input">
+            <textarea msd-elastic ng-if="!isComplex.selector
+                        && selected.field.hasOwnProperty('selectorAll')" ng-model="selected.field.selectorAll" ng-model-options="{updateOn: 'blur'}" ng-change="checkSelector('selectorAll')">
+            </textarea>
+        </div>
+        <div class="input">
+            <textarea msd-elastic ng-if="isComplex.selector
+                        && selected.field.hasOwnProperty('selector')
+                        && selected.field.selector.hasOwnProperty('selector')" ng-model="selected.field.selector.selector" ng-model-options="{updateOn: 'blur'}" ng-change="checkSelector('selector')">
+            </textarea>
+        </div>
+        <div class="input">
+            <textarea msd-elastic ng-if="isComplex.selector
+                        && selected.field.hasOwnProperty('selector')
+                        && selected.field.selector.hasOwnProperty('selectorAll')" ng-model="selected.field.selector.selectorAll" ng-model-options="{updateOn: 'blur'}" ng-change="checkSelector('selector')">
+            </textarea>
+        </div>
+        <div class="input">
+            <textarea msd-elastic ng-if="isComplex.selector
+                        && selected.field.hasOwnProperty('selectorAll')
+                        && selected.field.selectorAll.hasOwnProperty('selectorAll')" ng-model="selected.field.selectorAll.selectorAll" ng-model-options="{updateOn: 'blur'}" ng-change="checkSelector('selectorAll')">
+            </textarea>
+        </div>
+        <div class="input">
+            <textarea msd-elastic ng-if="isComplex.selector
+                        && selected.field.hasOwnProperty('selectorAll')
+                        && selected.field.selectorAll.hasOwnProperty('selector')" ng-model="selected.field.selectorAll.selector" ng-model-options="{updateOn: 'blur'}" ng-change="checkSelector('selectorAll')">
+            </textarea>
+        </div>
+    </div>
+
+    <div ng-if="hasFind()">
+        <span class="label">Function</span>
+        <span class="right fa fa-code" ng-click="openSourceEditor('find')" ng-class="{active: globals.activeSourceTab === 'find'}"></span>
+        <div class="select-function-container">
+            <ui-select class="find-function" ng-model="selectedFunctions.find" ng-change="onFnChange('find')" search-enabled="true" theme="select2">
+                <ui-select-match allow-clear placeholder="Select a Function">
+                    {{selectedFunctions.find.name}}
+                </ui-select-match>
+                <ui-select-choices position="auto" repeat="option in injectables['find'] | filter: $select.search">
+                    <div class="find-option">
+                        <span>{{option.name}}</span>
+                    </div>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+    </div>
+
+    <div ng-show="selectedFunctions.find" ng-class="{list: $index !== 0}" ng-repeat="argument in model.findArgs track by $index">
+        <span class="label" ng-if="$index === 0">Args 
+            <span class="right fa fa-plus" ng-click="addArgument('find')"></span>
+        </span>
+        <span class="label" ng-if="$index !== 0">
+            <span class="right fa fa-trash" ng-click="removeArgument('find', $index)"></span>
+        </span>
+        <div class="input">
+            <input type="text" ng-change="updateArgument('find')" ng-model="model.findArgs[$index]" ng-model-options="{updateOn: 'blur'}">
+        </div>
+    </div>
+
+    <div ng-if="hasFind()">
+        <span class="input" style="float: left; width: 50%; line-height: 36px;">
+            <span class="label">Hidden</span>
+            <input type="checkbox" ng-model="selected.field.selectHidden" ng-change="updateNode('selectHidden')">
+        </span>
+        <span class="" style="float: right; width: 50%; line-height: 36px;" ng-show="isComplex.selector && selected.field.hasOwnProperty('selector')">
+            <span class="">Multiple Nodes</span>
+            <input type="checkbox" ng-model="model.multipleNodes">
+        </span>
+        <span class="" style="float: right; width: 50%; line-height: 36px;" ng-show="isComplex.selector && selected.field.hasOwnProperty('selectorAll')">
+            <span class="">Single node</span>
+            <input type="checkbox" ng-model="model.singleNode">
+        </span>
+    </div>
+    <div ng-if="!model.isArray && hasFind()">
+        <span class="label">Index</span>
+        <div class="input">
+            <input type="text" ng-change="updateNode('selectIndex')" ng-model="selected.field.selectIndex" ng-model-options="{updateOn: 'blur'}">
+        </div>
+    </div>
+
+    <div ng-if="!model.isArray && hasFind()">
+        <span class="label">Contains</span>
+        <div class="input">
+            <input type="text" ng-change="updateNode('selectContains')" ng-model="selected.field.selectContains" ng-model-options="{updateOn: 'blur'}">
+        </div>
+    </div>
+
+    <div ng-if="hasFind()" ng-class="{list: $index !== 0}" ng-repeat="frameSelector in model.frameSelectors track by $index">
+        <span class="label" ng-if="$index === 0">Frames 
+            <span class="right fa fa-plus" ng-click="addFrameSelector()"></span>
+        </span>
+        <span class="label" ng-if="$index !== 0">
+            <span class="right fa fa-trash" ng-click="removeFrameSelector($index)"></span>
+        </span>
+        <div class="input">
+            <textarea msd-elastic ng-change="updateFrameSelector()" ng-model="model.frameSelectors[$index]" ng-model-options="{updateOn: 'blur'}"></textarea>
+        </div>
+    </div>
+
+    <!-- Extract / Control -->
+    <div class="header" ng-if="notObject()">
+        <span class="label fa fa-download"> Extract</span>
+        <span class="right fa fa-cogs" ng-click="viewExtract()" title="View Extract"></span>
+    </div>
+
+    <!-- <div ng-if="true || hasControl(selected.field)"> -->
+    <div ng-if="notObject()">
+        <span class="label">Control</span>
+        <span class="right fa fa-code" ng-click="openSourceEditor('controls')" ng-class="{active: globals.activeSourceTab === 'controls'}"></span>
+        <div class="select-function-container">
+            <ui-select class="control-function" ng-model="selectedFunctions.controls" ng-change="onFnChange('controls')" search-enabled="true" theme="select2">
+                <ui-select-match allow-clear placeholder="Select a Control">
+                    {{selectedFunctions.controls.name}}
+                </ui-select-match>
+                <ui-select-choices position="auto" repeat="option in injectables['controls'] | filter: $select.search">
+                    <div class="control-option">
+                        <span>{{option.name}}</span>
+                    </div>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+    </div>
+
+    <div ng-if="notObject()">
+        <span class="label">Params</span>
+        <!-- <div class="input">
+            <input type="text" ng-change="updateParams()"
+                ng-model="model.ctrlArg" ng-model-options="{updateOn: 'blur'}"/>
+        </div> -->
+        <div class="select-function-container">
+            <ui-select class="params-function" ng-model="model.ctrlArg" ng-change="updateParams()" tagging tagging-label="false" theme="select2">
+                <ui-select-match allow-clear placeholder="Select a Param">
+                    {{model.ctrlArg}}
+                </ui-select-match>
+                <ui-select-choices position="auto" repeat="option in getParam(selectedFunctions.controls.name) | filter: $select.search">
+                    <div class="params-option">
+                        <span>{{option}}</span>
+                    </div>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+    </div>
+
+    <div ng-if="hasExtract()">
+        <span class="label">Function</span>
+        <span class="right fa fa-code" ng-click="openSourceEditor('extract')" ng-class="{active: globals.activeSourceTab === 'extract'}"></span>
+        <div class="select-function-container">
+            <ui-select class="extract-function" ng-model="selectedFunctions.extract" ng-change="onFnChange('extract')" search-enabled="true" theme="select2">
+                <ui-select-match allow-clear placeholder="Select a Function">
+                    {{selectedFunctions.extract.name}}
+                </ui-select-match>
+                <ui-select-choices position="auto" repeat="option in injectables['extract'] | filter: $select.search">
+                    <div class="extract-option">
+                        <span>{{option.name}}</span>
+                    </div>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+    </div>
+
+    <div ng-show="selectedFunctions.extract" ng-class="{list: $index !== 0}" ng-repeat="argument in model.extractArgs track by $index">
+        <span class="label" ng-if="$index === 0">Args 
+            <span class="right fa fa-plus" ng-click="addArgument('extract')"></span>
+        </span>
+        <span class="label" ng-if="$index !== 0">
+            <span class="right fa fa-trash" ng-click="removeArgument('extract', $index)"></span> 
+        </span>
+        <div class="input">
+            <input type="text" ng-change="updateArgument('extract')" ng-model="model.extractArgs[$index]" ng-model-options="{updateOn: 'blur'}">
+        </div>
+    </div>
+
+    <div ng-if="hasExtract()">
+        <span class="label">Comment</span>
+        <div class="input">
+            <textarea msd-elastic ng-change="updateNode('comment')" ng-model="selected.field.comment" ng-model-options="{updateOn: 'blur'}"></textarea>
+        </div>
+    </div>
+</div>

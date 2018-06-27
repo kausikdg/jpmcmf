@@ -1,0 +1,59 @@
+<div class="heading">
+    <h1>Import from Repository</h1>
+</div>
+
+<div class="content">
+    <form class="form">
+        <label class="form-control row">
+            <span class="col-xs-3">
+                <span class="label">URL:</span>
+            </span>
+            <span class="col-xs-8">
+                <input type="text" ng-model="model.url" ng-change="checkProtocol()">
+            </span>
+        </label>
+
+        <label class="form-control row" ng-if="!sshProtocol">
+            <span class="col-xs-3">
+                <span class="label">Username:</span>
+            </span>
+            <span class="col-xs-8">
+                <input type="text" ng-model="model.username">
+            </span>
+        </label>
+        <label class="form-control row" ng-if="!sshProtocol">
+            <span class="col-xs-3">
+                <span class="label">Password:</span>
+            </span>
+            <span class="col-xs-8">
+                <input type="password" ng-model="model.password">
+            </span>
+        </label>
+
+        <label class="form-control row" ng-if="sshProtocol">
+            <span class="col-xs-3">
+                <span class="label">Path to SSH private Key:</span>
+            </span>
+            <span class="col-xs-8">
+                <input type="text" ng-model="model.privateKey">
+            </span>
+        </label>
+
+        <label class="form-control row" ng-if="env.appsDirs.length > 1">
+            <span class="col-xs-3">
+                <span class="label">Directory:</span>
+            </span>
+            <span class="col-xs-4">
+                <select ng-model="model.directory" ng-options="dir as dir for dir in env.appsDirs">
+                </select>
+            </span>
+        </label>
+    </form>
+</div>
+
+<div class="buttons">
+    <button class="button" ng-click="import()" ng-disabled="submitted || !isValid()">Import
+    </button>
+    <button class="button clear" ng-click="closeThisDialog()">Cancel
+    </button>
+</div>

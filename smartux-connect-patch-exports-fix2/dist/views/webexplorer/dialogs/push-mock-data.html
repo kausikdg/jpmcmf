@@ -1,0 +1,42 @@
+<div class="heading">
+    <h1>Save "{{selectedPageModel.id}}" data</h1>
+</div>
+
+<div class="content" style="height: 200px;">
+    <div class="row">
+        <div class="col col-xs-12">
+            <div class="subtitle">Extracted data:
+                <span class="icons">
+                    <button class="fa fa-clipboard" ng-click="copyToClipboard()" title="Copy To Clipboard"></button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <textarea id="previewTextarea" cols="30" rows="10" readonly="readonly" ng-model="preview" style="width: 100%; max-width: 100%"></textarea>
+</div>
+    
+<div class="content">
+    <div class="row">
+        <div class="col col-xs-12">
+            <div class="subtitle">Save to a mock data set:</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col col-xs-12">
+            <ul class="tree plain" options="treeOptions" tree-root>
+                <li ng-repeat="dataSet in mocks" tree-node="dataSet" collapsible></li>
+                <ng-include src="'/views/common/directives/tree/treeEditNode.html'" ng-if="edit"></ng-include>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="buttons">
+    <button class="button clear pull-left" ng-click="createDataSet()">
+        <i class="fa fa-plus"></i>Create data set
+    </button>
+    <button class="button" ng-click="submit()" ng-disabled="submitted || !model.dataSet">OK
+    </button>
+    <button class="button clear" ng-click="closeThisDialog()">Cancel
+    </button>
+</div>

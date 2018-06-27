@@ -1,0 +1,12 @@
+<li class="item" ng-repeat="treeItem in tree">
+    <label ng-if="treeItem.type!=='html'">
+        <input ng-if="treeItem.type === 'radio'" type="radio" name="{{treeItem.name}}" ng-value="treeItem.value" ng-change="onChange(treeItem)" ng-model="treeItem.model.value">
+        <input ng-if="treeItem.type === 'checkbox'" type="checkbox" name="{{treeItem.name}}" ng-change="onChange(treeItem)" ng-model="treeItem.model.value">
+        {{treeItem.label}}
+
+        <ul class="block padding-left" radio-tree ng-show="treeItem.collapsible ? treeItem.expanded : true" tree="treeItem.children" parent="treeItem" ng-model="ngModel">
+        </ul>
+    </label>
+    <label ng-if="treeItem.type==='html'" compile="treeItem.template">
+    </label>
+</li>

@@ -1,0 +1,12 @@
+<div class="heading">
+    <h1>{{ngDialogData.title}}</h1>
+</div>
+
+<div class="content" ng-bind-html="text"></div>
+
+<div class="buttons">
+    <button class="button" ng-click="closeThisDialog()">OK</button>
+    <button class="button clear" ng-click="reload()">
+        Reload Page
+    </button>
+</div>

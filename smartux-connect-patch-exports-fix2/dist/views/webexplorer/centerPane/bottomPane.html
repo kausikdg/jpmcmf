@@ -1,0 +1,38 @@
+<div class="pane pane-with-tabs pane-bottom explorer">
+    <div class="tabs">
+
+        <div class="tab" ng-repeat="source in ['find', 'controls', 'extract']">
+            <input type="radio" id="{{source}}" class="marker" value="{{source}}" ng-model="globals.activeSourceTab">
+            <label for="{{source}}" class="target" ng-click="selectTab(source); selectFunction();">
+                <span class="title">
+                    <i class="fa" ng-class="getClass(source)"></i>
+                    <span>{{source}}</span>
+                </span>
+            </label>
+
+            <div class="content" ng-if="source == globals.activeSourceTab">
+                <div class="pane">
+                    <div class="pane-block height-full">
+                        <div class="header target">
+                            <span>{{source}} Functions</span>
+                            <button class="fa fa-plus" ng-click="addFunction(source)" title="Add {{source}} Function"></button>
+                        </div>
+                        <div class="content no-padding">
+                            <ul class="tree" tree-root options="functionOptions">
+                                <li ng-repeat="file in injectables[source]" tree-node="file" collapsible></li>
+                                <ng-include src="'/views/common/directives/tree/treeEditNode.html'" ng-if="edit && (edit.type == source)"></ng-include>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="editor-view" ng-readonly="isNotEditable()" ng-if="globals.selectedFunction.src != null" class="monaco-container" monaco-editor mode="'javascript'" ng-model="globals.selectedFunction.src" on-load="editorLoaded(editor)" ng-change="fileChanged(editor)" data-screen-id="{{source}}">
+                </div>
+            </div>
+        </div>
+
+        <span class="tab right">
+            <button class="fa fa-times" ng-click="closeSourceEditor()"></button>
+        </span>
+    </div>
+</div>
