@@ -1,8 +1,0 @@
-<div id="center-layout" ui-layout="{flow: 'row', dividerSize: 5}">
-    <div ui-layout-container id="north" ui-view="topPane" style="height: inherit !important">
-    </div>
-    <div ui-layout-container id="south" ui-view="bottomPane" size="350px" ng-if="globals.sourceEditorOpened">
-    </div>
-</div>
-
-<div ui-view="xFilesEditor" ng-show="isAllFilesMode()"></div>

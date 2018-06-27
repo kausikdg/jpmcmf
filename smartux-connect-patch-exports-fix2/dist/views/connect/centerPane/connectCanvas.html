@@ -1,8 +1,0 @@
-<div>
-    <floating-button ng-show="hasOpenedViews()" class="custom-event" current-endpoint="currentEndpoint"></floating-button>
-    <connect-canvas ng-click="selectEventArea(null, $event)" ng-if="currentEndpoint" current-endpoint="currentEndpoint">
-        <event-area ng-repeat="eventArea in currentEndpoint.getEventAreas()" id="{{eventArea.getId()}}" eventarea="eventArea" current-endpoint="currentEndpoint">
-        </event-area>
-    </connect-canvas>
-    </div>
-

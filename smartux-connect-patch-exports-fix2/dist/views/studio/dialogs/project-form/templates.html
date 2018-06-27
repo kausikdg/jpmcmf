@@ -1,9 +1,0 @@
-<div class="row">
-    <div class="cards cards-templates">
-        <a class="card layouts-list" ng-click="selectTemplate(template)" ng-class="{'focused': model.sourceAppId == template.id}" ng-if="template.supported" ng-repeat="template in templates">
-                     <span class="title" ng-bind-html="template.name"></span>
-            <div class="template-preview margin-centered" style="background-image: url('{{getIconUrl(template)}}');">
-            </div>
-        </a>
-    </div>
-</div>
